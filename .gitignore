@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Data and generated artifacts
+data/raw/
+data/processed/
+outputs/
+*.pdf
+
+# Operating system files
+.DS_Store
+
