@@ -1,0 +1,29 @@
+{
+  "ticker": "AAPL",
+  "provider": "Finnhub company news",
+  "retrieved_at": "2026-10-02T05:45:50+00:00",
+  "purpose": "Small, source-attributed live evidence sample for the Person 1 news pipeline. It is not investment advice or a recommendation.",
+  "items": [
+    {
+      "title": "Should Apple join the consumer AI agent race? And should Big Tech self-police on AI?",
+      "summary": "In this episode of Market Hang, Turney Duff and his panel of experts weigh in on AI concerns, including the possibility of Big Tech self-policing, Nvidia's (NVDA) circular financing, and more.Today's panel includes Futurum CEO Daniel Newman, Yahoo Finance's Julie Hyman, and Gerber Kawasaki Wealth and Investment Management CEO Ross Gerber.",
+      "publisher": "Yahoo",
+      "link": "https://finnhub.io/api/news?id=89c9fa8cfdfe90c07e4d9ca0d2c545594f63e7b1807dee0b00d9bb82b0e36faa",
+      "published_at": "2026-10-01T18:27:22+00:00"
+    },
+    {
+      "title": "Apple's new CEO plans to send shocking memo to Apple employees",
+      "summary": "The new Apple CEO hasn’t said much publicly. What he is doing speaks louder.",
+      "publisher": "Yahoo",
+      "link": "https://finnhub.io/api/news?id=c2562a37adafce900419b79c5f24c09feff60492da312c259fdf138f8718c91c",
+      "published_at": "2026-10-01T17:47:00+00:00"
+    },
+    {
+      "title": "Warren Buffett's Successor Has Billions Invested in These 2 Tech Stocks. Here's the Better Buy.",
+      "summary": "Apple and Alphabet are two major cornerstones of Berkshire's portfolio.",
+      "publisher": "Yahoo",
+      "link": "https://finnhub.io/api/news?id=a7146ab146c7259e4459879b8303fed7a0c278b1599c1e18eb2a7832fae441fa",
+      "published_at": "2026-10-01T16:35:00+00:00"
+    }
+  ]
+}

@@ -43,6 +43,29 @@ The default demonstration ticker is `AAPL`. The live FinBERT model
 (`ProsusAI/finbert`) downloads on first use; tests use a deterministic classifier
 fixture and do not call external services.
 
+### Reliable live-data fallbacks
+
+Yahoo Finance remains the default. When its news endpoint is empty or
+rate-limited, Person 1 can use either independent, key-based provider below.
+Both return the same `ToolResult` and `raw_news` structures as the Yahoo tools,
+so Person 2 does not need a provider-specific route.
+
+| Provider | Capabilities | Required environment variable |
+| --- | --- | --- |
+| Alpha Vantage | Quote, company overview, market news/sentiment | `ALPHA_VANTAGE_API_KEY` |
+| Finnhub | Quote, basic financial metrics, company news | `FINNHUB_API_KEY` |
+
+Add only the key(s) you choose to your untracked `.env` file. Each API response
+retains its provider name, URL, and access timestamp. The final notebook must
+state data access dates, source limitations, and that the output is educational
+research rather than personalized financial advice.
+
+The Yahoo adapter requests the `all` news tab once and keeps its response in a
+15-minute in-memory cache. This reduces duplicate requests and respects a
+temporary provider limit; it does not attempt to circumvent Yahoo's limits. If
+Yahoo returns no items or a rate-limit error, call either alternative provider
+instead of repeatedly retrying Yahoo.
+
 ## Setup
 
 Create a virtual environment, install dependencies, then add required API keys to a local `.env` file. Do not commit API keys, large raw datasets, or generated notebook checkpoints.

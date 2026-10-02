@@ -6,8 +6,7 @@ import re
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from typing import Any, Protocol
-from urllib.parse import urlsplit, urlunsplit
-from xml.etree import ElementTree
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from .data_tools import SourceReference
 
@@ -68,9 +67,18 @@ class NewsPipeline:
     making an unsupported market claim before the specialist reviews it.
     """
 
-    def __init__(self, ticker_factory: Any | None = None, classifier: SentimentClassifier | None = None) -> None:
+    def __init__(
+        self,
+        ticker_factory: Any | None = None,
+        classifier: SentimentClassifier | None = None,
+        news_tab: str = "all",
+        cache_ttl_seconds: int = 900,
+    ) -> None:
         self._ticker_factory = ticker_factory
         self._classifier = classifier or FinBertClassifier()
+        self._news_tab = news_tab
+        self._cache_ttl_seconds = cache_ttl_seconds
+        self._news_cache: dict[str, tuple[datetime, list[dict[str, Any]]]] = {}
 
     @staticmethod
     def _clean_text(value: object) -> str:
@@ -80,7 +88,10 @@ class NewsPipeline:
     @staticmethod
     def _canonical_url(url: str) -> str:
         parts = urlsplit(url)
-        return urlunsplit((parts.scheme, parts.netloc, parts.path.rstrip("/"), "", ""))
+        # Drop tracking fields but retain the provider's actual article ID.
+        # Finnhub serves individual articles from one path with `?id=...`.
+        identity_query = urlencode([(key, value) for key, value in parse_qsl(parts.query) if key.lower() == "id"])
+        return urlunsplit((parts.scheme, parts.netloc, parts.path.rstrip("/"), identity_query, ""))
 
     @staticmethod
     def _published_at(raw: object) -> str | None:
@@ -103,44 +114,23 @@ class NewsPipeline:
             raise RuntimeError("Install project dependencies before using yfinance news.") from exc
         return yf.Ticker(ticker)
 
-    @staticmethod
-    def _yahoo_rss_news(ticker: str) -> list[dict[str, Any]]:
-        """Use Yahoo Finance's public RSS as a no-key fallback for yfinance."""
-        try:
-            import requests
-        except ImportError as exc:  # pragma: no cover - dependency-specific
-            raise RuntimeError("Install requests before using the Yahoo Finance RSS fallback.") from exc
-        url = f"https://feeds.finance.yahoo.com/rss/2.0/headline?s={ticker}&region=US&lang=en-US"
-        response = requests.get(url, timeout=20)
-        response.raise_for_status()
-        root = ElementTree.fromstring(response.content)
-        records: list[dict[str, Any]] = []
-        for item in root.findall("./channel/item"):
-            records.append(
-                {
-                    "title": item.findtext("title"),
-                    "summary": item.findtext("description"),
-                    "publisher": "Yahoo Finance RSS",
-                    "link": item.findtext("link"),
-                    "published_at": item.findtext("pubDate"),
-                }
-            )
-        return records
-
     def ingest(self, ticker: str = "AAPL") -> tuple[list[dict[str, Any]], list[str]]:
         symbol = ticker.strip().upper()
+        cached = self._news_cache.get(symbol)
+        if cached and (datetime.now(UTC) - cached[0]).total_seconds() < self._cache_ttl_seconds:
+            return cached[1], []
         try:
             ticker_client = self._get_ticker(symbol)
-            # ``Ticker.news`` can be empty with newer yfinance releases even
-            # when the query-backed ``get_news`` endpoint has results.
-            raw_news = ticker_client.news or []
-            if not raw_news and hasattr(ticker_client, "get_news"):
-                raw_news = ticker_client.get_news(count=10) or []
-            if not raw_news:
-                raw_news = self._yahoo_rss_news(symbol)
+            # One request per TTL window: ``Ticker.news`` delegates to this
+            # endpoint, so calling both duplicates Yahoo traffic and can make a
+            # temporary rate limit worse. ``all`` includes both regular news
+            # and press-release entries when Yahoo has them.
+            raw_news = ticker_client.get_news(count=10, tab=self._news_tab) if hasattr(ticker_client, "get_news") else ticker_client.news
             if not raw_news:
                 return [], ["No Yahoo Finance news items returned."]
-            return list(raw_news), []
+            normalized = list(raw_news)
+            self._news_cache[symbol] = (datetime.now(UTC), normalized)
+            return normalized, []
         except Exception as exc:
             return [], [str(exc)]
 
