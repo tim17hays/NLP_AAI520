@@ -30,6 +30,19 @@ tests/        Unit and integration tests
 docs/         Architecture notes and source documentation
 ```
 
+## Person 1 data and news handoff
+
+`src/data_tools.py` provides source-attributed company, market, and financial
+snapshots through Yahoo Finance (`yfinance`). `src/news_pipeline.py` implements
+the required news chain: ingest, preprocess, FinBERT classify, extract evidence,
+and create an extractive, source-preserving summary. Both modules return
+JSON-compatible payloads so the planner and routing components can consume them
+without relying on pandas or provider-specific objects.
+
+The default demonstration ticker is `AAPL`. The live FinBERT model
+(`ProsusAI/finbert`) downloads on first use; tests use a deterministic classifier
+fixture and do not call external services.
+
 ## Setup
 
 Create a virtual environment, install dependencies, then add required API keys to a local `.env` file. Do not commit API keys, large raw datasets, or generated notebook checkpoints.
@@ -43,4 +56,3 @@ pip install -r requirements.txt
 ## Project status
 
 Week 1 focuses on the initial retrieval/news, planning/routing, and evaluation/memory prototypes. The team will agree on the model, tools, shared data format, and final source choices at kickoff.
-

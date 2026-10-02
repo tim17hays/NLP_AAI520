@@ -17,7 +17,7 @@ data/raw/
 data/processed/
 outputs/
 *.pdf
+!docs/requirements/*.pdf
 
 # Operating system files
 .DS_Store
-
