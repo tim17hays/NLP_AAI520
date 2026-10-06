@@ -60,11 +60,18 @@ retains its provider name, URL, and access timestamp. The final notebook must
 state data access dates, source limitations, and that the output is educational
 research rather than personalized financial advice.
 
-The Yahoo adapter requests the `all` news tab once and keeps its response in a
-15-minute in-memory cache. This reduces duplicate requests and respects a
-temporary provider limit; it does not attempt to circumvent Yahoo's limits. If
-Yahoo returns no items or a rate-limit error, call either alternative provider
-instead of repeatedly retrying Yahoo.
+The Yahoo adapter calls Yahoo Finance's standard GET search endpoint once with
+a 20-second timeout and keeps a successful response in a 15-minute in-memory
+cache. This avoids yfinance's cookie/crumb POST path for news retrieval while
+the market-data tools continue to use yfinance. It does not attempt to
+circumvent Yahoo's limits: if Yahoo returns no items, a rate-limit error, or a
+timeout, the pipeline uses its fallback providers instead of repeatedly
+retrying Yahoo.
+
+The integrated news pipeline now performs that fallback automatically: Yahoo is
+attempted once, then Finnhub and Alpha Vantage are tried in that order when
+their keys are present. Market-data tools also reuse the same yfinance ticker
+client within a run and apply a 15-second timeout to historical-price requests.
 
 ## Setup
 

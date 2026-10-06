@@ -48,8 +48,10 @@ class StockResearchTools:
     for the planning, routing, and evaluation agents.
     """
 
-    def __init__(self, ticker_factory: Callable[[str], Any] | None = None) -> None:
+    def __init__(self, ticker_factory: Callable[[str], Any] | None = None, request_timeout: int = 15) -> None:
         self._ticker_factory = ticker_factory
+        self._request_timeout = request_timeout
+        self._ticker_cache: dict[str, Any] = {}
 
     @staticmethod
     def normalize_ticker(ticker: str) -> str:
@@ -63,13 +65,19 @@ class StockResearchTools:
         return datetime.now(UTC).isoformat()
 
     def _get_ticker(self, ticker: str) -> Any:
+        if ticker in self._ticker_cache:
+            return self._ticker_cache[ticker]
         if self._ticker_factory:
-            return self._ticker_factory(ticker)
+            client = self._ticker_factory(ticker)
+            self._ticker_cache[ticker] = client
+            return client
         try:
             import yfinance as yf
         except ImportError as exc:  # pragma: no cover - environment-dependent
             raise RuntimeError("Install project dependencies before using yfinance tools.") from exc
-        return yf.Ticker(ticker)
+        client = yf.Ticker(ticker)
+        self._ticker_cache[ticker] = client
+        return client
 
     def company_profile(self, ticker: str = "AAPL") -> ToolResult:
         symbol = self.normalize_ticker(ticker)
@@ -88,7 +96,11 @@ class StockResearchTools:
         symbol = self.normalize_ticker(ticker)
         source = SourceReference("Yahoo Finance historical prices", f"https://finance.yahoo.com/quote/{symbol}/history", self._accessed_at())
         try:
-            history = self._get_ticker(symbol).history(period=period, auto_adjust=False)
+            history = self._get_ticker(symbol).history(
+                period=period,
+                auto_adjust=False,
+                timeout=self._request_timeout,
+            )
             if history is None or history.empty:
                 return ToolResult("market_snapshot", symbol, sources=[source], errors=["No historical price data returned."])
             closes = history["Close"].dropna()
