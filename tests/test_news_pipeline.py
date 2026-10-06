@@ -1,3 +1,4 @@
+from src.data_tools import SourceReference, ToolResult
 from src.news_pipeline import NewsPipeline
 
 
@@ -45,7 +46,7 @@ def test_yfinance_ingest_uses_one_cached_all_news_request():
         def get_news(self, count, tab):
             self.calls += 1
             assert count == 10
-            assert tab == "all"
+            assert tab == "news"
             return RAW_NEWS
 
     ticker = FakeTicker()
@@ -69,3 +70,29 @@ def test_news_pipeline_preserves_finnhub_article_ids_when_deduplicating():
     assert len(result["items"]) == 2
     assert result["items"][0]["source"]["url"].endswith("id=one")
     assert result["items"][1]["source"]["url"].endswith("id=two")
+
+
+def test_news_pipeline_uses_live_provider_fallback_when_yahoo_is_empty():
+    class EmptyYahooTicker:
+        def get_news(self, count, tab):
+            return []
+
+    class FinnhubFallback:
+        def news_feed(self, ticker):
+            return ToolResult(
+                "news_feed",
+                ticker,
+                {"raw_news": [RAW_NEWS[0]]},
+                [SourceReference("Finnhub company news", "https://finnhub.io/api/v1/company-news?symbol=AAPL", "2026-10-05T00:00:00+00:00")],
+            )
+
+    pipeline = NewsPipeline(
+        ticker_factory=lambda _: EmptyYahooTicker(),
+        classifier=FakeFinBert(),
+        fallback_news_sources=[FinnhubFallback()],
+    )
+    result = pipeline.process("AAPL")
+
+    assert result["errors"] == []
+    assert len(result["items"]) == 1
+    assert result["items"][0]["publisher"] == "Example Finance"

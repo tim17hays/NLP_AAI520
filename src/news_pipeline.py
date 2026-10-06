@@ -71,14 +71,18 @@ class NewsPipeline:
         self,
         ticker_factory: Any | None = None,
         classifier: SentimentClassifier | None = None,
-        news_tab: str = "all",
+        news_tab: str = "news",
         cache_ttl_seconds: int = 900,
+        fallback_news_sources: list[Any] | None = None,
+        yahoo_timeout_seconds: int = 20,
     ) -> None:
         self._ticker_factory = ticker_factory
         self._classifier = classifier or FinBertClassifier()
         self._news_tab = news_tab
         self._cache_ttl_seconds = cache_ttl_seconds
         self._news_cache: dict[str, tuple[datetime, list[dict[str, Any]]]] = {}
+        self._fallback_news_sources = fallback_news_sources
+        self._yahoo_timeout_seconds = yahoo_timeout_seconds
 
     @staticmethod
     def _clean_text(value: object) -> str:
@@ -114,25 +118,66 @@ class NewsPipeline:
             raise RuntimeError("Install project dependencies before using yfinance news.") from exc
         return yf.Ticker(ticker)
 
+    def _fetch_yahoo_news(self, ticker: str) -> list[dict[str, Any]]:
+        """Get Yahoo search news with a bounded standard HTTP request."""
+        if self._ticker_factory is not None:
+            client = self._get_ticker(ticker)
+            return list(client.get_news(count=10, tab=self._news_tab) if hasattr(client, "get_news") else client.news)
+
+        try:
+            import requests
+        except ImportError as exc:  # pragma: no cover - environment-dependent
+            raise RuntimeError("Install project dependencies before using Yahoo Finance news.") from exc
+
+        response = requests.get(
+            "https://query1.finance.yahoo.com/v1/finance/search",
+            params={"q": ticker, "newsCount": 10, "quotesCount": 1, "listsCount": 0},
+            headers={"User-Agent": "Mozilla/5.0 (compatible; AAI520-research-agent/1.0)"},
+            timeout=self._yahoo_timeout_seconds,
+        )
+        response.raise_for_status()
+        return list(response.json().get("news", []))
+
     def ingest(self, ticker: str = "AAPL") -> tuple[list[dict[str, Any]], list[str]]:
         symbol = ticker.strip().upper()
         cached = self._news_cache.get(symbol)
         if cached and (datetime.now(UTC) - cached[0]).total_seconds() < self._cache_ttl_seconds:
             return cached[1], []
+        yahoo_error: str | None = None
         try:
-            ticker_client = self._get_ticker(symbol)
-            # One request per TTL window: ``Ticker.news`` delegates to this
-            # endpoint, so calling both duplicates Yahoo traffic and can make a
-            # temporary rate limit worse. ``all`` includes both regular news
-            # and press-release entries when Yahoo has them.
-            raw_news = ticker_client.get_news(count=10, tab=self._news_tab) if hasattr(ticker_client, "get_news") else ticker_client.news
+            # One standard Yahoo request per TTL window. A bounded GET avoids
+            # yfinance's cookie/crumb POST path for news retrieval.
+            raw_news = self._fetch_yahoo_news(symbol)
             if not raw_news:
-                return [], ["No Yahoo Finance news items returned."]
-            normalized = list(raw_news)
-            self._news_cache[symbol] = (datetime.now(UTC), normalized)
-            return normalized, []
+                yahoo_error = "Yahoo Finance returned no news items."
+            else:
+                normalized = list(raw_news)
+                self._news_cache[symbol] = (datetime.now(UTC), normalized)
+                return normalized, []
         except Exception as exc:
-            return [], [str(exc)]
+            yahoo_error = f"Yahoo Finance news failed: {exc}"
+
+        fallback_results = []
+        for source in self._get_fallback_news_sources():
+            result = source.news_feed(symbol)
+            fallback_results.append(result)
+            if result.ok and result.data.get("raw_news"):
+                normalized = list(result.data["raw_news"])
+                self._news_cache[symbol] = (datetime.now(UTC), normalized)
+                return normalized, []
+
+        fallback_errors = [error for result in fallback_results for error in result.errors]
+        return [], [error for error in [yahoo_error, *fallback_errors] if error]
+
+    def _get_fallback_news_sources(self) -> list[Any]:
+        """Create independent live-news fallbacks only when they are needed."""
+        if self._fallback_news_sources is not None:
+            return self._fallback_news_sources
+        from .alternative_sources import AlphaVantageClient, FinnhubClient
+
+        # Finnhub is the preferred live source because Alpha Vantage's free
+        # plan has a small daily request allowance.
+        return [FinnhubClient(), AlphaVantageClient()]
 
     def process(self, ticker: str = "AAPL", raw_news: list[dict[str, Any]] | None = None) -> dict[str, Any]:
         """Return a stable handoff payload for the planner/routing agent."""

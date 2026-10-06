@@ -4,7 +4,8 @@ from src.data_tools import StockResearchTools
 class FakeTicker:
     info = {"longName": "Apple Inc.", "sector": "Technology", "marketCap": 3000000000000}
 
-    def history(self, period, auto_adjust):
+    def history(self, period, auto_adjust, timeout):
+        assert timeout == 15
         class Series:
             index = ["2026-10-01", "2026-10-02"]
             empty = False
@@ -50,3 +51,17 @@ def test_invalid_ticker_is_rejected_before_lookup():
         assert "ticker" in str(error)
     else:
         raise AssertionError("Invalid ticker should be rejected")
+
+
+def test_ticker_client_is_reused_for_related_requests():
+    calls = []
+
+    def ticker_factory(symbol):
+        calls.append(symbol)
+        return FakeTicker()
+
+    tools = StockResearchTools(ticker_factory=ticker_factory)
+    tools.company_profile("AAPL")
+    tools.market_snapshot("AAPL")
+
+    assert calls == ["AAPL"]
