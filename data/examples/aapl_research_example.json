@@ -1,0 +1,245 @@
+{
+  "ticker": "AAPL",
+  "research_question": "Analyze Apple stock performance, earnings, and recent news sentiment.",
+  "specialists": [
+    "market",
+    "earnings",
+    "news"
+  ],
+  "evidence": {
+    "market": {
+      "tool": "market_snapshot",
+      "ticker": "AAPL",
+      "data": {
+        "period": "1mo",
+        "as_of": "2026-10-09 00:00:00-04:00",
+        "latest_close": 336.64,
+        "period_return_pct": 3.08,
+        "observations": 22
+      },
+      "sources": [
+        {
+          "name": "Yahoo Finance historical prices",
+          "url": "https://finance.yahoo.com/quote/AAPL/history",
+          "accessed_at": "2026-10-12T04:27:20.010229+00:00"
+        }
+      ],
+      "errors": []
+    },
+    "earnings": {
+      "tool": "financial_snapshot",
+      "ticker": "AAPL",
+      "data": {
+        "totalRevenue": 466822987776,
+        "grossProfits": 227123003392,
+        "ebitda": 167959003136,
+        "netIncomeToCommon": 128929996800,
+        "trailingPE": 38.605507,
+        "profitMargins": 0.27618998
+      },
+      "sources": [
+        {
+          "name": "Yahoo Finance financials",
+          "url": "https://finance.yahoo.com/quote/AAPL/financials",
+          "accessed_at": "2026-10-12T04:27:21.758942+00:00"
+        }
+      ],
+      "errors": []
+    },
+    "news": {
+      "ticker": "AAPL",
+      "workflow": [
+        "ingest",
+        "preprocess",
+        "classify_finbert",
+        "extract",
+        "summarize"
+      ],
+      "items": [
+        {
+          "ticker": "AAPL",
+          "title": "Apple (AAPL) Resets With New CEO, Podcast Deal And A Fresh Phone Threat",
+          "summary": "",
+          "publisher": "Simply Wall St.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/apple-aapl-resets-ceo-podcast-031707055.html",
+          "published_at": "2026-10-12T03:17:07+00:00",
+          "sentiment": "negative",
+          "sentiment_score": 0.7619,
+          "extracted_facts": [
+            "Apple (AAPL) Resets With New CEO, Podcast Deal And A Fresh Phone Threat."
+          ],
+          "source": {
+            "name": "Simply Wall St.",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apple-aapl-resets-ceo-podcast-031707055.html",
+            "accessed_at": "2026-10-12T04:27:33.493615+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Elon Musk Will \u2018Eventually\u2019 Make a Phone, Says Gene Munster: Starlink Device Will Be a \u2018Bigger Problem\u2019 for Apple, Samsung",
+          "summary": "",
+          "publisher": "Benzinga",
+          "url": "https://finance.yahoo.com/technology/articles/elon-musk-eventually-phone-says-003006870.html",
+          "published_at": "2026-10-12T00:30:06+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.673,
+          "extracted_facts": [
+            "Elon Musk Will \u2018Eventually\u2019 Make a Phone, Says Gene Munster: Starlink Device Will Be a \u2018Bigger Problem\u2019 for Apple, Samsung."
+          ],
+          "source": {
+            "name": "Benzinga",
+            "url": "https://finance.yahoo.com/technology/articles/elon-musk-eventually-phone-says-003006870.html",
+            "accessed_at": "2026-10-12T04:27:33.563735+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Forget Chasing Volume. Here's the Most Active Stock I'd Actually Hold for 5 Years.",
+          "summary": "",
+          "publisher": "Motley Fool",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/forget-chasing-volume-heres-most-232000590.html",
+          "published_at": "2026-10-11T23:20:00+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.9261,
+          "extracted_facts": [
+            "Here's the Most Active Stock I'd Actually Hold for 5 Years.."
+          ],
+          "source": {
+            "name": "Motley Fool",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/forget-chasing-volume-heres-most-232000590.html",
+            "accessed_at": "2026-10-12T04:27:33.618331+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Microsoft Is Taking AI Beyond the Data Center, But Its Surface Business Is Just a Small Piece of the Pie",
+          "summary": "",
+          "publisher": "Barchart",
+          "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-taking-ai-beyond-data-203002679.html",
+          "published_at": "2026-10-11T20:30:02+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.9307,
+          "extracted_facts": [
+            "Microsoft Is Taking AI Beyond the Data Center, But Its Surface Business Is Just a Small Piece of the Pie."
+          ],
+          "source": {
+            "name": "Barchart",
+            "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-taking-ai-beyond-data-203002679.html",
+            "accessed_at": "2026-10-12T04:27:33.677869+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Not Alphabet. Not Amazon. Microsoft Trades at Big Tech's Cheapest Valuation.",
+          "summary": "",
+          "publisher": "Motley Fool",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/not-alphabet-not-amazon-microsoft-201400664.html",
+          "published_at": "2026-10-11T20:14:00+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.8814,
+          "extracted_facts": [
+            "Not Alphabet."
+          ],
+          "source": {
+            "name": "Motley Fool",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/not-alphabet-not-amazon-microsoft-201400664.html",
+            "accessed_at": "2026-10-12T04:27:33.738248+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Apple Has Consistently Lost the Smart-Home Race. A New Partnership With LG Could Change That.",
+          "summary": "",
+          "publisher": "Barchart",
+          "url": "https://finance.yahoo.com/technology/articles/apple-consistently-lost-smart-home-172621710.html",
+          "published_at": "2026-10-11T17:26:21+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.4019,
+          "extracted_facts": [
+            "Apple Has Consistently Lost the Smart-Home Race."
+          ],
+          "source": {
+            "name": "Barchart",
+            "url": "https://finance.yahoo.com/technology/articles/apple-consistently-lost-smart-home-172621710.html",
+            "accessed_at": "2026-10-12T04:27:33.807867+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Warren Buffett said 'nobody gets paid' to give this easy investing advice \u2014 how it\u2019s still helping your portfolio today",
+          "summary": "",
+          "publisher": "Moneywise",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-said-nobody-gets-133000670.html",
+          "published_at": "2026-10-11T13:30:00+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.7963,
+          "extracted_facts": [
+            "Warren Buffett said 'nobody gets paid' to give this easy investing advice \u2014 how it\u2019s still helping your portfolio today."
+          ],
+          "source": {
+            "name": "Moneywise",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-said-nobody-gets-133000670.html",
+            "accessed_at": "2026-10-12T04:27:33.864836+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Tim Cook Told Apple CEO John Ternus \u2018Don\u2019t Mimic Me\u2019 Before Stepping Aside Ahead of Apple\u2019s Big iPhone Launch: 'I\u2019m Not a Meddler'",
+          "summary": "",
+          "publisher": "Benzinga",
+          "url": "https://finance.yahoo.com/technology/articles/tim-cook-told-apple-ceo-094507099.html",
+          "published_at": "2026-10-11T09:45:07+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.5737,
+          "extracted_facts": [
+            "Tim Cook Told Apple CEO John Ternus \u2018Don\u2019t Mimic Me\u2019 Before Stepping Aside Ahead of Apple\u2019s Big iPhone Launch: 'I\u2019m Not a Meddler'."
+          ],
+          "source": {
+            "name": "Benzinga",
+            "url": "https://finance.yahoo.com/technology/articles/tim-cook-told-apple-ceo-094507099.html",
+            "accessed_at": "2026-10-12T04:27:33.936671+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Siri AI at Day 28: Apple Ships the HomePad Screen Oct 13 \u2014 but the Enterprise Half Doesn\u2019t Exist",
+          "summary": "",
+          "publisher": "Forkast News",
+          "url": "https://finance.yahoo.com/technology/ai/articles/siri-ai-day-28-apple-082748320.html",
+          "published_at": "2026-10-11T08:27:48+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.932,
+          "extracted_facts": [
+            "Siri AI at Day 28: Apple Ships the HomePad Screen Oct 13 \u2014 but the Enterprise Half Doesn\u2019t Exist."
+          ],
+          "source": {
+            "name": "Forkast News",
+            "url": "https://finance.yahoo.com/technology/ai/articles/siri-ai-day-28-apple-082748320.html",
+            "accessed_at": "2026-10-12T04:27:33.997424+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Four Years In, $40 Trillion Up: Why This AI-Fueled Bull Market Has Room to Run",
+          "summary": "",
+          "publisher": "Barrons.com",
+          "url": "https://finance.yahoo.com/m/4a6ddf57-8100-34f1-89a7-923bd93d7e6d/four-years-in%2C-%2440-trillion.html",
+          "published_at": "2026-10-11T08:00:00+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.8537,
+          "extracted_facts": [
+            "Four Years In, $40 Trillion Up: Why This AI-Fueled Bull Market Has Room to Run."
+          ],
+          "source": {
+            "name": "Barrons.com",
+            "url": "https://finance.yahoo.com/m/4a6ddf57-8100-34f1-89a7-923bd93d7e6d/four-years-in%2C-%2440-trillion.html",
+            "accessed_at": "2026-10-12T04:27:34.053222+00:00"
+          }
+        }
+      ],
+      "summary": "Processed 10 source-attributed news items (1 negative, 9 neutral). Representative headlines: Apple (AAPL) Resets With New CEO, Podcast Deal And A Fresh Phone Threat; Elon Musk Will \u2018Eventually\u2019 Make a Phone, Says Gene Munster: Starlink Device Will Be a \u2018Bigger Problem\u2019 for Apple, Samsung; Forget Chasing Volume. Here's the Most Active Stock I'd Actually Hold for 5 Years..",
+      "errors": []
+    }
+  },
+  "draft_analysis": "Research Summary: AAPL\n\nMarket Performance: The latest reported closing price was $336.64, with a one-month return of 3.08% across 22 observations. Market data is attributed to Yahoo Finance historical prices.\n\nFinancial Metrics: Yahoo Finance reports total revenue of $466,822,987,776, gross profit of $227,123,003,392, net income of $128,929,996,800, and a trailing P/E ratio of 38.605507. These figures are reported metrics; the available snapshot does not establish their trend or the period they cover.\n\nNews Sentiment: The news pipeline returned 10 items. Classifier labels were: {'negative': 1, 'neutral': 9}. Because the retrieved summaries are empty and extracted facts largely repeat headlines, these labels should be treated as preliminary signals rather than verified conclusions about the underlying stories.\n\nLimitations: This is a preliminary evidence summary, not a complete investment recommendation. Verify reporting periods, news details, and source dates before drawing conclusions."
+}
