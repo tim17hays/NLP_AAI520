@@ -7,6 +7,7 @@ from typing import Any
 
 from .data_tools import StockResearchTools
 from .news_pipeline import NewsPipeline
+from .llm import generate_draft
 
 @dataclass(frozen=True)
 class ResearchPlan:
@@ -137,9 +138,16 @@ class ResearchPlanner:
                 result = self._news_pipeline.process(symbol)
                 evidence["news"] = result
 
+        draft_analysis = generate_draft(
+            ticker=symbol,
+            research_question=research_question.strip(),
+            evidence=evidence,
+        )
+
         return {
             "ticker": symbol,
             "research_question": research_question.strip(),
             "specialists": specialists,
             "evidence": evidence,
+            "draft_analysis": draft_analysis,
         }

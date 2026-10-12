@@ -1,4 +1,14 @@
+
+import src.planning as planning_module
 from src.planning import ResearchPlanner
+
+
+def mock_generate_draft(monkeypatch):
+    monkeypatch.setattr(
+        planning_module,
+        "generate_draft",
+        lambda **kwargs: "Mock financial research draft.",
+    )
 
 
 def test_route_selects_market_specialist():
@@ -35,6 +45,7 @@ def test_empty_question_is_rejected():
     else:
         raise AssertionError("Empty research question should be rejected")
 
+
 def test_plan_creates_research_steps():
     planner = ResearchPlanner()
 
@@ -68,7 +79,10 @@ def test_plan_uses_company_fallback():
         "Retrieve evidence from the company specialist."
     )
 
-def test_execute_routes_earnings_to_financial_tool():
+
+def test_execute_routes_earnings_to_financial_tool(monkeypatch):
+    mock_generate_draft(monkeypatch)
+
     class FakeTools:
         def financial_snapshot(self, ticker):
             return type(
@@ -93,7 +107,10 @@ def test_execute_routes_earnings_to_financial_tool():
     assert result["specialists"] == ["earnings"]
     assert result["evidence"]["earnings"]["data"]["revenue"] == 100
 
-def test_execute_routes_news_to_news_pipeline():
+
+def test_execute_routes_news_to_news_pipeline(monkeypatch):
+    mock_generate_draft(monkeypatch)
+
     class FakeNewsPipeline:
         def process(self, ticker):
             return {
@@ -117,7 +134,10 @@ def test_execute_routes_news_to_news_pipeline():
     assert result["evidence"]["news"]["ticker"] == "AAPL"
     assert result["evidence"]["news"]["items"][0]["sentiment"] == "positive"
 
-def test_execute_routes_market_to_market_tool():
+
+def test_execute_routes_market_to_market_tool(monkeypatch):
+    mock_generate_draft(monkeypatch)
+
     class FakeTools:
         def market_snapshot(self, ticker):
             return type(
@@ -143,7 +163,9 @@ def test_execute_routes_market_to_market_tool():
     assert result["evidence"]["market"]["data"]["latest_close"] == 250.0
 
 
-def test_execute_routes_company_to_profile_tool():
+def test_execute_routes_company_to_profile_tool(monkeypatch):
+    mock_generate_draft(monkeypatch)
+
     class FakeTools:
         def company_profile(self, ticker):
             return type(
@@ -168,7 +190,10 @@ def test_execute_routes_company_to_profile_tool():
     assert result["specialists"] == ["company"]
     assert result["evidence"]["company"]["data"]["sector"] == "Technology"
 
-def test_execute_market_with_real_research_tool():
+
+def test_execute_market_with_real_research_tool(monkeypatch):
+    mock_generate_draft(monkeypatch)
+
     from src.data_tools import StockResearchTools
 
     planner = ResearchPlanner(
@@ -185,7 +210,10 @@ def test_execute_market_with_real_research_tool():
     assert "market" in result["evidence"]
     assert result["evidence"]["market"]["errors"] == []
 
-def test_execute_earnings_with_real_research_tool():
+
+def test_execute_earnings_with_real_research_tool(monkeypatch):
+    mock_generate_draft(monkeypatch)
+
     from src.data_tools import StockResearchTools
 
     planner = ResearchPlanner(
@@ -202,7 +230,10 @@ def test_execute_earnings_with_real_research_tool():
     assert "earnings" in result["evidence"]
     assert result["evidence"]["earnings"]["errors"] == []
 
-def test_execute_news_with_provided_news_evidence():
+
+def test_execute_news_with_provided_news_evidence(monkeypatch):
+    mock_generate_draft(monkeypatch)
+
     class FakeNewsPipeline:
         def process(self, ticker):
             return {
@@ -229,7 +260,10 @@ def test_execute_news_with_provided_news_evidence():
     assert len(result["evidence"]["news"]["items"]) == 1
     assert result["evidence"]["news"]["items"][0]["sentiment"] == "positive"
 
-def test_execute_combines_multiple_specialists():
+
+def test_execute_combines_multiple_specialists(monkeypatch):
+    mock_generate_draft(monkeypatch)
+
     class FakeTools:
         def financial_snapshot(self, ticker):
             return type(
@@ -268,11 +302,7 @@ def test_execute_combines_multiple_specialists():
     )
 
     assert result["specialists"] == ["earnings", "news"]
-
     assert "earnings" in result["evidence"]
     assert "news" in result["evidence"]
-
     assert result["evidence"]["earnings"]["data"]["revenue"] == 100
     assert result["evidence"]["news"]["items"][0]["sentiment"] == "positive"
-
-    
