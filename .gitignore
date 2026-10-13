@@ -21,3 +21,6 @@ outputs/
 
 # Operating system files
 .DS_Store
+
+# Private local team-message draft
+docs/team/REPLY_DRAFT.md

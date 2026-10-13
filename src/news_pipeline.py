@@ -187,6 +187,7 @@ class NewsPipeline:
             raw_news, errors = self.ingest(symbol)
         seen_urls: set[str] = set()
         items: list[NewsItem] = []
+        preprocessed: list[dict[str, str]] = []
         for entry in raw_news:
             content = entry.get("content", entry)
             title = self._clean_text(content.get("title") or entry.get("title"))
@@ -199,6 +200,7 @@ class NewsPipeline:
             publisher = self._clean_text(content.get("provider", {}).get("displayName") if isinstance(content.get("provider"), dict) else entry.get("publisher")) or "Unknown publisher"
             published = self._published_at(content.get("pubDate") or entry.get("providerPublishTime") or entry.get("published_at"))
             text = self._clean_text(f"{title}. {summary}")
+            preprocessed.append({"text": text, "url": canonical_url})
             try:
                 label, score = self._classifier.classify(text)
             except Exception as exc:
@@ -213,6 +215,18 @@ class NewsPipeline:
             "items": [item.to_dict() for item in items],
             "summary": self._summarize(items),
             "errors": errors,
+            "trace": {
+                "ingest": {"input_count": len(raw_news)},
+                "preprocess": {"retained_count": len(items), "records": preprocessed},
+                "classify_finbert": [
+                    {"url": item.url, "label": item.sentiment, "score": item.sentiment_score}
+                    for item in items
+                ],
+                "extract": [
+                    {"url": item.url, "facts": item.extracted_facts} for item in items
+                ],
+                "summarize": self._summarize(items),
+            },
         }
 
     @staticmethod

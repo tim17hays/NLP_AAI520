@@ -1,3 +1,7 @@
+import os
+
+import pytest
+
 
 import src.planning as planning_module
 from src.planning import ResearchPlanner
@@ -191,6 +195,7 @@ def test_execute_routes_company_to_profile_tool(monkeypatch):
     assert result["evidence"]["company"]["data"]["sector"] == "Technology"
 
 
+@pytest.mark.skipif(os.getenv("AAI520_LIVE_TESTS") != "1", reason="Set AAI520_LIVE_TESTS=1 for provider checks")
 def test_execute_market_with_real_research_tool(monkeypatch):
     mock_generate_draft(monkeypatch)
 
@@ -211,6 +216,7 @@ def test_execute_market_with_real_research_tool(monkeypatch):
     assert result["evidence"]["market"]["errors"] == []
 
 
+@pytest.mark.skipif(os.getenv("AAI520_LIVE_TESTS") != "1", reason="Set AAI520_LIVE_TESTS=1 for provider checks")
 def test_execute_earnings_with_real_research_tool(monkeypatch):
     mock_generate_draft(monkeypatch)
 

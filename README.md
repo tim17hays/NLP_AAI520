@@ -85,4 +85,36 @@ pip install -r requirements.txt
 
 ## Project status
 
-Week 1 focuses on the initial retrieval/news, planning/routing, and evaluation/memory prototypes. The team will agree on the model, tools, shared data format, and final source choices at kickoff.
+As of October 12, 2026, retrieval/news and planning/Qwen drafting are implemented.
+The integration branch adds lessons to planning/drafting and source-linked traces.
+Ashley's evaluator/revision/memory code and actual two-run GPU validation still
+need to be integrated. See [integration handoff](docs/team/INTEGRATION_HANDOFF.md)
+for verified refs, callable examples, ownership and remaining checkpoints.
+
+Draft generation uses Hugging Face Transformers with
+`Qwen/Qwen2.5-1.5B-Instruct`, loaded locally on CUDA; no paid LLM API key is
+required. This is distinct from `ProsusAI/finbert` for news sentiment. Large
+weights download on first use. Select a Colab GPU runtime for actual inference.
+
+```python
+from src.planning import ResearchPlanner
+result = ResearchPlanner().execute(
+    ticker="AAPL",
+    research_question="Summarize market performance, financial metrics and news.",
+    lessons=["Do not infer reporting periods absent from evidence."],
+)
+print(result["draft_analysis"])
+```
+
+Tim's executed, synthetic offline handoff section is
+[the notebook](notebooks/tim_data_news_handoff.ipynb) and
+[the rendered HTML](notebooks/tim_data_news_handoff.html). It demonstrates
+intermediate news stages, deduplication, source alignment, empty retrieval and
+classifier failure, with explicit fixture labels and an AI assistance disclosure.
+Roopleen should incorporate it into the proposed final notebook at
+`notebooks/final_multi_agent_financial_analysis.ipynb` on `main`.
+
+Run offline checks with `python -m pytest -q`. Live provider tests are separately
+opted into with `AAI520_LIVE_TESTS=1 python -m pytest -q`; they depend on network
+access and provider availability. Offline tests use injected models and do not
+establish actual Qwen quality or FinBERT accuracy.

@@ -1,5 +1,7 @@
 
-import torch
+import sys
+from contextlib import nullcontext
+from types import SimpleNamespace
 
 from src.llm import generate_draft
 
@@ -43,7 +45,7 @@ def test_generate_draft_returns_text(monkeypatch):
         "src.llm._load_model",
         lambda: (FakeTokenizer(), FakeModel()),
     )
-    monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
+    monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(no_grad=nullcontext))
 
     result = generate_draft(
         ticker="AAPL",

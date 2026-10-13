@@ -47,3 +47,12 @@ def test_missing_provider_key_is_a_recoverable_tool_error():
 
     assert not result.ok
     assert "ALPHA_VANTAGE_API_KEY" in result.errors[0]
+
+
+def test_provider_error_does_not_expose_api_key():
+    def failed_get(url, params, timeout):
+        raise RuntimeError("Request failed: token=private-test-token")
+    result = FinnhubClient(api_key="private-test-token", http_get=failed_get).market_snapshot("AAPL")
+    assert not result.ok
+    assert "private-test-token" not in str(result.to_dict())
+    assert "[REDACTED]" in result.errors[0]

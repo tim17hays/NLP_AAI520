@@ -35,7 +35,7 @@ class _KeyedClient:
             load_dotenv()
         except ImportError:  # pragma: no cover - dependency-specific
             pass
-        self.api_key = api_key or os.getenv(self.env_key, "")
+        self.api_key = api_key if api_key is not None else os.getenv(self.env_key, "")
         self._http_get = http_get
 
     def _get(self, url: str, *, params: dict[str, Any]) -> Any:
@@ -49,9 +49,13 @@ class _KeyedClient:
             http_get = requests.get
         else:
             http_get = self._http_get
-        response = http_get(url, params=params, timeout=20)
-        response.raise_for_status()
-        payload = response.json()
+        try:
+            response = http_get(url, params=params, timeout=20)
+            response.raise_for_status()
+            payload = response.json()
+        except Exception as exc:
+            # requests errors may contain the full URL, including credentials.
+            raise RuntimeError(str(exc).replace(self.api_key, "[REDACTED]")) from None
         return payload
 
     @staticmethod

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from .data_tools import StockResearchTools
@@ -17,6 +17,7 @@ class ResearchPlan:
     research_question: str
     specialists: list[str]
     steps: list[str]
+    retrieved_lessons: list = field(default_factory=list)
 
 class ResearchPlanner:
     """Create a research plan by routing a question to specialists."""
@@ -88,7 +89,7 @@ class ResearchPlanner:
 
         return selected
     
-    def plan(self, ticker: str, research_question: str) -> ResearchPlan:
+    def plan(self, ticker: str, research_question: str, lessons: list | None = None) -> ResearchPlan:
         """Create a research plan for the given stock and question."""
         symbol = self.normalize_ticker(ticker)
         specialists = self.route(research_question)
@@ -101,6 +102,10 @@ class ResearchPlanner:
             for specialist in specialists
         ]
 
+        if lessons:
+            steps.insert(0, "Review retrieved lessons before collecting and drafting evidence: "
+                         + str(lessons))
+
         steps.append("Combine the retrieved evidence into a draft analysis.")
         steps.append("Send the draft analysis and supporting evidence for evaluation.")
 
@@ -109,9 +114,10 @@ class ResearchPlanner:
             research_question=research_question.strip(),
             specialists=specialists,
             steps=steps,
+            retrieved_lessons=list(lessons or []),
         )
     
-    def execute(self, ticker: str, research_question: str) -> dict[str, Any]:
+    def execute(self, ticker: str, research_question: str, lessons: list | None = None) -> dict[str, Any]:
         """Execute the specialists selected for the research question."""
         symbol = self.normalize_ticker(ticker)
         specialists = self.route(research_question)
@@ -119,6 +125,7 @@ class ResearchPlanner:
         if not specialists:
             specialists = ["company"]
 
+        plan = self.plan(symbol, research_question, lessons=lessons)
         evidence: dict[str, Any] = {}
 
         for specialist in specialists:
@@ -142,6 +149,7 @@ class ResearchPlanner:
             ticker=symbol,
             research_question=research_question.strip(),
             evidence=evidence,
+            lessons=plan.retrieved_lessons,
         )
 
         return {
@@ -150,4 +158,11 @@ class ResearchPlanner:
             "specialists": specialists,
             "evidence": evidence,
             "draft_analysis": draft_analysis,
+            "plan": asdict(plan),
+            "retrieved_lessons": plan.retrieved_lessons,
+            "tool_trace": [
+                {"specialist": name, "tool": payload.get("tool", "news_pipeline"),
+                 "errors": payload.get("errors", [])}
+                for name, payload in evidence.items()
+            ],
         }
