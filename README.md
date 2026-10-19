@@ -85,6 +85,9 @@ pip install -r requirements.txt
 
 ## Shared team version
 
+The combined work is on `codex/final-team-integration`, pending merge into `main`.
+The integration runner clones that branch until the merge is approved.
+
 The combined repository preserves Tim's, Roopleen's and Ashley's commits and
 original component notebooks. **Repository integration is complete; final live
 feedback validation and the submission notebook/export are still pending.**

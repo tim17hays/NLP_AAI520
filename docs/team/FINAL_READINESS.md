@@ -1,5 +1,9 @@
 # Shared integration status
 
+Combined branch: `codex/final-team-integration`. Publishing succeeded; the GitHub
+tool request to create a pull request was rejected, so `main` has not been updated.
+Review/merge this branch to make the shared code available on `main`.
+
 All three authors' branches are combined into this version, preserving their
 commit history and original notebooks. This integration connects existing work;
 it does not claim that the final submission or live feedback validation is done.
