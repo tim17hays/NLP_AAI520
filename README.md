@@ -211,3 +211,12 @@ Use the shared GPU runner for actual model integration testing. Review the
 
 The team notebook calls Qwen through local Transformers, so no paid LLM API key
 or per-token provider balance is required. Colab GPU limits are separate.
+
+### If an evaluation JSON response is malformed
+
+The shared model boundary permits one schema-correction retry, preserving the
+invalid raw output and error in the model-call log. No scoring defaults are
+inserted. Two invalid responses still stop the run. After updating the code,
+restart the Colab session or rerun the updated setup/import cells before model
+execution. Save existing partial results first. A format retry is distinct from
+an analysis revision and does not imply improved analysis quality.

@@ -36,6 +36,12 @@ MEMORY_PATH = Path("data/processed/research_lessons.json")
 source = header + helpers + '\n\n' + '\n\n'.join(
     ''.join(nb['cells'][index]['source']) for index in (5, 7, 9, 11, 13, 15)
 ) + '\n'
+source += """
+# Integration transport hardening; authored functions/prompts above are unchanged.
+from .model_transport import with_schema_retry
+
+qwen_call_model = with_schema_retry(qwen_call_model, MODEL_CALL_LOG, CRITERIA)
+"""
 ast.parse(source)
 (ROOT / 'src/evaluation_memory.py').write_text(source)
 print('Synchronized authored evaluator functions; no Drive/model code executed.')

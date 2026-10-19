@@ -81,3 +81,17 @@ skipped**. All 26 evaluator function bodies match Ashley's authored notebook.
 The final notebook's 14 code cells execute locally in recorded-evidence mode
 without notebook errors. Its HTML preview is generated from those outputs.
 This does not replace Tim's upcoming fresh Colab GPU run.
+
+## Structured-response error hardening
+
+A fresh Colab run exposed a malformed evaluation object during controlled Run 2
+("All five criteria must be scored exactly once"). Run 1's lesson and partial
+experiment ZIP were preserved; that failed attempt is not a completed Run 2.
+
+`src/model_transport.py` now strengthens the exact JSON response contract and
+permits one schema-correction attempt. It sends the original evidence together
+with the validation error and unvalidated raw response. It does not invent
+scores, rename criteria or relax acceptance. Both calls remain in the log;
+a second invalid response still raises. Runtime/context/output-limit errors
+are not retried by this formatting recovery. Ashley's authored functions and
+prompts remain unchanged; the wrapper is applied at the integration boundary.

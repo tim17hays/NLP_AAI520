@@ -1272,3 +1272,8 @@ def run_research_with_memory(
     )
 
     return result
+
+# Integration transport hardening; authored functions/prompts above are unchanged.
+from .model_transport import with_schema_retry
+
+qwen_call_model = with_schema_retry(qwen_call_model, MODEL_CALL_LOG, CRITERIA)
