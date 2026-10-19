@@ -89,8 +89,7 @@ The combined work is on `codex/final-team-integration`, pending merge into `main
 The integration runner clones that branch until the merge is approved.
 
 The combined repository preserves Tim's, Roopleen's and Ashley's commits and
-original component notebooks. **Repository integration is complete; final live
-feedback validation and the submission notebook/export are still pending.**
+original component notebooks. **The final combined notebook is assembled. Tim must run it in a fresh Colab GPU runtime and review the executed export before submission.**
 See [current readiness and ownership](docs/team/FINAL_READINESS.md).
 
 | Component | Shared code | Author / integration |
@@ -107,8 +106,12 @@ Use Python 3.12 and a CUDA GPU runtime for actual Qwen inference. The model is
 `ProsusAI/finbert` for news sentiment. No paid LLM API key is required. Model
 weights download on first use. Optional data-provider keys stay in `.env`.
 
-Start with [the team integration runner](notebooks/team_integration_runner.ipynb)
-in a fresh Colab GPU runtime, or run this from the repository root:
+Start with [the final combined notebook](notebooks/final_multi_agent_financial_analysis.ipynb)
+in a fresh Colab T4 GPU runtime and choose **Run all**. It includes the full
+research flow, authored controlled experiment, actual historical results,
+limitations, references and export/download cell. The shorter
+[team integration runner](notebooks/team_integration_runner.ipynb) remains a
+component debugging tool. To run live AAPL research from the repository root:
 
 ```bash
 python -m src.workflow --live --ticker AAPL
@@ -122,8 +125,9 @@ Use `--memory PATH` for a persistent Drive location in Colab; runtime-local
 storage is temporary. Do not delete existing lessons to make a demonstration pass.
 
 Exit status 0 means both final evaluations passed, a revision was exercised, and
-a new run-one lesson reached run two. Exit status 2 after completed runs means
-that demonstration is incomplete. Runtime/model/provider failures remain errors.
+a new run-one lesson reached run two. Workflow delivery and quality acceptance
+are reported separately. Exit status 2 after completed runs means one or more
+acceptance/delivery conditions were not met, not that no lesson could be saved. Runtime/model/provider failures remain errors.
 These checks do not certify factual correctness or prove memory caused an
 improvement: inspect source citations, evidence, feedback and the actual drafts.
 
@@ -159,15 +163,19 @@ and `tool_trace`.
 
 Original notebooks preserve their historical outputs and setup pins; use the
 shared runner for new tests of this combined code. They are not three separate
-final submissions. The final target remains
-`notebooks/final_multi_agent_financial_analysis.ipynb`, which is not assembled
-yet. Roopleen leads assembly; Ashley leads memory/evaluation verification and
-PDF/HTML export; Tim reviews integration and coordinates team approval/submission.
+final submissions. The final combined source is
+[final_multi_agent_financial_analysis.ipynb](notebooks/final_multi_agent_financial_analysis.ipynb).
+Local validation uses clearly labeled recorded-evidence mode; Colab enables
+fresh model calls by default. Download the executed notebook and export HTML
+with the last cell or `python scripts/export_submission.py PATH_TO_NOTEBOOK`.
 
-The recorded live runs made no revisions and saved no new lesson. Ashley also
-reported that missing citations were incorrectly accepted. Those are open
-validation findings, not resolved by a passing offline suite. Retain honest
-limitations and AI assistance attribution in the final submission.
+Ashley's demonstrations show that a lesson was saved after Run 1 and retrieved
+before Run 2. The recorded runs did not demonstrate improved analysis quality.
+The controlled real-model results were 7/10 to 7/10 (two revisions) and 5/10 to
+5/10 (one completed revision); neither final analysis passed. Process-lesson
+delivery succeeded. Fixed fictional evidence, different initial draft origins,
+manual factual errors and citation limitations are explicitly documented. Do
+not replace these failures with claims of a successful quality improvement.
 
 ## Tests
 
@@ -188,3 +196,18 @@ AAI520_LIVE_TESTS=1 python -m pytest -q
 
 Use the shared GPU runner for actual model integration testing. Review the
 [readiness checklist](docs/team/FINAL_READINESS.md) before final export.
+
+## Final Colab and export steps
+
+1. Open the final notebook from `codex/final-team-integration` in Colab.
+2. Select a T4 GPU runtime, then **Run all**. Actual model weights are downloaded
+   on first use; the code prints the repository revision and runtime versions.
+3. Save/download the executed notebook and artifact ZIP. The ZIP contains model
+   call logs and reports; if automatic notebook capture fails, export the
+   downloaded notebook locally with `scripts/export_submission.py`.
+4. Review all outputs, limitations and the disclosure, then upload the approved
+   PDF/HTML. The local recorded-evidence HTML is a preview of documented results,
+   not proof of your upcoming fresh GPU execution.
+
+The team notebook calls Qwen through local Transformers, so no paid LLM API key
+or per-token provider balance is required. Colab GPU limits are separate.

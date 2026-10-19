@@ -100,3 +100,17 @@ def test_no_lesson_does_not_report_complete_feedback_loop(tmp_path):
     assert not result["demonstration_complete"]
     assert not result["new_run_one_lesson_used_in_run_two"]
     assert not result["revision_exercised"]
+
+
+def test_shared_evaluator_does_not_drift_from_authored_notebook():
+    """Prevent the stale-module integration bug found during final assembly."""
+    import ast
+    source_path = Path(__file__).resolve().parents[1] / 'notebooks/evaluation_revision_memory.ipynb'
+    notebook = json.loads(source_path.read_text())
+    authored = ast.parse('\n'.join(''.join(notebook['cells'][i]['source']) for i in (3, 5, 7, 9, 11, 13, 15)))
+    shared = ast.parse(Path(evaluation.__file__).read_text())
+    function_bodies = lambda tree: {
+        node.name: ast.dump(node, include_attributes=False)
+        for node in tree.body if isinstance(node, ast.FunctionDef)
+    }
+    assert function_bodies(authored) == function_bodies(shared)

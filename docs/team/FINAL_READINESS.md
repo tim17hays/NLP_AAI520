@@ -1,74 +1,83 @@
-# Shared integration status
+# Final submission status — October 19, 2026
 
-Combined branch: `codex/final-team-integration`. Publishing succeeded; the GitHub
-tool request to create a pull request was rejected, so `main` has not been updated.
-Review/merge this branch to make the shared code available on `main`.
+The combined code and final notebook are on `codex/final-team-integration`.
+`main` has not been updated. Use the linked integration branch for Colab and
+ensure any repository link in the submission identifies the correct branch.
 
-All three authors' branches are combined into this version, preserving their
-commit history and original notebooks. This integration connects existing work;
-it does not claim that the final submission or live feedback validation is done.
+## Final notebook and execution
 
-## Canonical code and entry point
+- `notebooks/final_multi_agent_financial_analysis.ipynb` combines all three
+  contributions, explanations, source evidence, checks, real-model recorded
+  results, honest limitations, references and AI disclosure.
+- Local execution is explicitly **recorded-evidence audit mode**: synthetic
+  offline checks and the recorded Colab outputs are inspected without claiming
+  a fresh GPU run.
+- In a fresh Colab T4 GPU runtime, **Run all** enables new AAPL retrieval/Qwen
+  drafting and Ashley's authored controlled two-run model experiment. The last
+  cell attempts notebook/HTML capture and downloads an artifact ZIP.
+- If Colab notebook capture is unavailable, download the executed `.ipynb` and
+  use `python scripts/export_submission.py PATH_TO_NOTEBOOK` to create HTML.
+- Check the rendered artifact and actual outputs before upload. Do not claim
+  team approval, Canvas submission or a fresh GPU run from local audit alone.
 
-- `src/data_tools.py`, `src/news_pipeline.py`, `src/alternative_sources.py`: Tim's retrieval and five-stage news chain.
-- `src/planning.py`, `src/llm.py`: Roopleen's planner/Qwen work with Tim's lesson/source-preservation integration fixes.
-- `src/evaluation_memory.py`: Ashley's evaluator, revision and persistent-memory functions extracted from her notebook without changing scoring or prompts. Importing this module does not mount Drive or load models.
-- `src/workflow.py`: shared two-run driver, artifact logging and explicit loop-completion flags.
-- `notebooks/team_integration_runner.ipynb`: common setup and actual workflow calls for team GPU testing. No saved live results are claimed for this new runner.
+## Correct interpretation of the completed demonstrations
 
-The original component notebooks retain their historical outputs and pinned
-checkouts. Use the shared runner to test the current combined code, rather than
-copying the old notebooks' repository setup cells into a combined notebook.
+Ashley's demonstrations show that a lesson was saved after Run 1 and retrieved
+before Run 2. The recorded runs did not demonstrate improved analysis quality.
 
-## Validation boundaries
+The controlled experiment used **real Qwen calls and fixed fictional DEMO
+company evidence**, not fresh AAPL market data. Run 1 began with a deliberately
+uncited human-written draft; Run 2 used the team Qwen generator. Those different
+starting conditions prevent a causal claim that memory caused a quality change.
 
-Offline tests verify wiring, failure/stopping behavior, source preservation,
-lesson persistence and delivery using clearly labeled scripted fixtures.
-`tests/test_team_workflow.py` exercises the actual shared planner with Ashley's
-evaluation/revision/memory implementation and all ten of her acceptance groups.
-CI runs lightweight offline checks without weights or provider calls.
+Recorded results: Run 1 stayed at 7/10 after two revisions and stopped at the
+revision limit; Run 2 stayed at 5/10 after one completed revision and stopped on
+an unchanged draft. Neither final analysis passed. Workflow/memory-delivery
+checks passed. One process-lesson record was stored; returning that existing
+record on Run 2 is not a second unique lesson.
 
-Recorded real Colab results are retained in the original notebooks. Ashley's
-recorded live runs both scored 10/10 but made zero revisions and saved no new
-lesson. Her notebook acknowledges missing citations were incorrectly accepted.
-The scripted offline lesson example does not establish actual LLM improvement.
-The new shared driver does not conceal this: its demonstration flag is false
-unless a revision occurs, a new run-one lesson reaches run two, and both final
-evaluations pass. That flag still does not verify factual correctness or prove
-that memory caused an improvement. Check citations and claims manually.
+Current citation checks reject missing/unknown references. Narrow benchmark
+checks supplement the model evaluator; manual review still found unsupported
+comparisons and incorrect calculations. Delivery is demonstrated; reliable
+financial-answer improvement is not. These are documented limitations, not
+fabricated passes or a missing demonstration.
 
-## Still required before submission
+## Code synchronization and ownership
 
-| Work | Owner | Evidence needed |
-| --- | --- | --- |
-| Tighten evaluator acceptance for missing citations and unsupported claims | Ashley | Real flawed-draft critique, correction and re-evaluation |
-| Exercise persistent memory with the actual model | Ashley + Roopleen | Saved run-one lesson, retrieval before run two and inspected effect |
-| Assemble the final team notebook | Roopleen, all contribute | One narrative with all workflows, functions, code, outputs and GitHub link |
-| Fresh GPU execution of the combined notebook | Ashley + Roopleen; Tim reviews | Complete ordered outputs, source dates, runtime/model versions and honest failures |
-| Export readable PDF or HTML | Ashley | Visual QA and all three approvals |
-| Submit team artifact and individual peer evaluations | Tim submits team artifact; each submits own evaluation | Canvas confirmation; not inferable from GitHub |
+Tim: retrieval/news, source/error trace and integration.
+Roopleen: planning/routing and Qwen drafting.
+Ashley: evaluator, bounded revisions, benchmark/citation checks and memory.
 
-Proposed submission notebook: `notebooks/final_multi_agent_financial_analysis.ipynb`.
-It does not exist yet. The shared runner is an integration tool, not a final
-submission. Tim's HTML is a component handoff, not a full team export.
+`src/evaluation_memory.py` now matches all 26 function bodies from Ashley's
+updated authored notebook. `scripts/sync_evaluation_module.py` regenerates the
+shared module without executing models or mounting Drive. A regression check
+prevents the old shared-module drift from recurring. No evaluator algorithms or
+prompts were redesigned during submission assembly.
 
-## Authorship and AI assistance
+The original component notebooks preserve their recorded outputs. Tim's
+"Live handoff" wording and matching HTML are corrected. The old October 12
+handoff and early October 18 audit are historical snapshots, not current results.
+The final notebook is the canonical combined submission source.
 
-Original planning/Qwen work is Roopleen Kaur's, evaluator/revision/memory work is
-Ashley Marx's, and retrieval/news and integration work are Tim Hays's. Codex
-assisted Tim with consolidation, extraction of existing functions, shared runner,
-tests and documentation. Review and adapt the AI disclosure in the final artifact.
+## Remaining human steps
 
-`INTEGRATION_HANDOFF.md` and `FINAL_READINESS_AUDIT_2026-10-18.md` are dated
-historical snapshots. This file and the root README describe the combined code.
-Private reply drafts, API keys, local memories and generated outputs remain
-untracked. Do not put secrets into notebooks or JSON example artifacts.
+1. Tim runs the final notebook in a fresh Colab GPU runtime.
+2. Inspect that run's drafts, evidence, lesson provenance, failure states and
+   export. Fresh results may differ from the historical scores; report them as
+   measured. A failed quality decision must remain failed.
+3. Review the AI disclosure and collect final team approval.
+4. Upload the approved PDF/HTML to Canvas and record confirmation. Each member
+   submits their individual peer evaluation. Repository contents do not confirm
+   those submissions or the official Canvas deadline.
 
-## Consolidation checks
+No paid model-provider token balance is needed for this local open-weight model
+setup. Colab GPU availability/runtime limits and model-download access still
+apply. Optional news-provider keys stay private.
 
-The combined suite passes **30 tests**, with **2 live-provider tests skipped**.
-The shared runner's code cells compile; they have not been executed with real
-models for this combined commit. Ashley's extracted function bodies match her
-notebook source. All three remote team branch tips are preserved in the merge
-history. Syntax and whitespace checks pass. The private message draft and `.env`
-are excluded from tracked files.
+## Latest local checks
+
+The synchronized code passes **31 tests**, with **2 opt-in live-provider tests
+skipped**. All 26 evaluator function bodies match Ashley's authored notebook.
+The final notebook's 14 code cells execute locally in recorded-evidence mode
+without notebook errors. Its HTML preview is generated from those outputs.
+This does not replace Tim's upcoming fresh Colab GPU run.

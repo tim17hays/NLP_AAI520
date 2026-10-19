@@ -1,0 +1,346 @@
+{
+  "provenance": {
+    "author": "Ashley Marx",
+    "source_notebook": "notebooks/evaluation_revision_memory.ipynb",
+    "source_cell": 27,
+    "source_commit": "85419e0",
+    "execution_mode": "real Qwen calls with fixed fictional DEMO evidence",
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "derivation": "Drafts, evaluation histories, lessons and flags extracted from recorded stdout. Scores/revision counts are derived from those recorded histories; no new inference was performed."
+  },
+  "results": [
+    {
+      "run_number": 1,
+      "initial_draft": "DEMO's Q2 2026 revenue was USD 120 million versus USD 100 million in Q2 2025,\na 20% increase: (120 - 100) / 100 * 100. Operating income of USD 12 million\nimplies an operating margin of 10%: 12 / 120 * 100. \n\nThe closing price rose from USD 40 on August 31 to USD 44 on September 30,\n2026, a 10% price change. This is not an adjusted total-return calculation:\ndividend and corporate-action information was not supplied. \n\nSupplier delays could increase near-term costs; their financial effect is not\nquantified.  No management forecast or price target is\nprovided.  These limited inputs do\nnot support guaranteed profits or a forecast of next month's return.",
+      "revised_analysis": "In Q2 2026, DEMO reported a revenue of $120 million, marking a 20% increase from $100 million in Q2 2025. This represents a significant growth in revenue compared to the prior quarter. The company's operating income for this period was $12 million, yielding an operating margin of 10%, indicating that the operational efficiency has improved slightly over the past two quarters. The closing price of DEMO increased by 10% from $40 on August 31 to $44 on September 30, reflecting a positive performance but without adjustments for dividends and corporate actions. Supplier delays were mentioned as a potential cost driver, although their exact financial impact remains uncertain. While there is no provided management forecast or price target, these factors limit the ability to predict future returns accurately.",
+      "revision_history": [
+        {
+          "iteration": 0,
+          "draft_analysis": "DEMO's Q2 2026 revenue was USD 120 million versus USD 100 million in Q2 2025,\na 20% increase: (120 - 100) / 100 * 100. Operating income of USD 12 million\nimplies an operating margin of 10%: 12 / 120 * 100. \n\nThe closing price rose from USD 40 on August 31 to USD 44 on September 30,\n2026, a 10% price change. This is not an adjusted total-return calculation:\ndividend and corporate-action information was not supplied. \n\nSupplier delays could increase near-term costs; their financial effect is not\nquantified.  No management forecast or price target is\nprovided.  These limited inputs do\nnot support guaranteed profits or a forecast of next month's return.",
+          "scores": {
+            "evidence_support": 0,
+            "completeness": 2,
+            "consistency": 2,
+            "uncertainty": 1,
+            "clarity": 2
+          },
+          "model_evaluation": {
+            "scores": {
+              "evidence_support": 1,
+              "completeness": 2,
+              "consistency": 2,
+              "uncertainty": 1,
+              "clarity": 2
+            },
+            "feedback": [],
+            "critical_issues": [],
+            "lesson": ""
+          },
+          "citation_check": {
+            "recognized_references": [],
+            "unknown_references": [],
+            "issues": [
+              "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+            ],
+            "passed": false,
+            "scope": "Minimum citation presence and reference validity only."
+          },
+          "content_check": {
+            "applied": true,
+            "checks": [
+              "Minimum coverage of computed percentage values.",
+              "Flag missing-data claims about available benchmark metrics.",
+              "Flag the observed unsupported prior-income comparison."
+            ],
+            "issues": [],
+            "passed": true,
+            "scope": "Narrow benchmark checks. Passing is not proof that every claim, calculation association, or citation is correct."
+          },
+          "lesson_origin": "rule-derived from observed citation failure",
+          "total_score": 7,
+          "feedback": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+          ],
+          "critical_issues": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+          ],
+          "lesson": "Cite supplied source URLs or valid evidence paths next to factual claims, and do not invent source references.",
+          "passed": false
+        },
+        {
+          "iteration": 1,
+          "draft_analysis": "In Q2 2026, DEMO reported a revenue of $120 million, representing a 20% increase from $100 million in Q2 2025. The company's operating income for this period was $12 million, resulting in an operating margin of 10%. The closing price of DEMO increased by 10% from $40 on August 31 to $44 on September 30, reflecting a positive performance but without adjusting for dividends and corporate actions. Supplier delays were mentioned as a potential cost driver, though their exact financial impact remains uncertain. There is no provided management forecast or price target, limiting the ability to predict future returns accurately.",
+          "scores": {
+            "evidence_support": 0,
+            "completeness": 2,
+            "consistency": 2,
+            "uncertainty": 1,
+            "clarity": 2
+          },
+          "model_evaluation": {
+            "scores": {
+              "evidence_support": 1,
+              "completeness": 2,
+              "consistency": 2,
+              "uncertainty": 1,
+              "clarity": 2
+            },
+            "feedback": [],
+            "critical_issues": [],
+            "lesson": ""
+          },
+          "citation_check": {
+            "recognized_references": [],
+            "unknown_references": [],
+            "issues": [
+              "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+            ],
+            "passed": false,
+            "scope": "Minimum citation presence and reference validity only."
+          },
+          "content_check": {
+            "applied": true,
+            "checks": [
+              "Minimum coverage of computed percentage values.",
+              "Flag missing-data claims about available benchmark metrics.",
+              "Flag the observed unsupported prior-income comparison."
+            ],
+            "issues": [],
+            "passed": true,
+            "scope": "Narrow benchmark checks. Passing is not proof that every claim, calculation association, or citation is correct."
+          },
+          "lesson_origin": "rule-derived from observed citation failure",
+          "total_score": 7,
+          "feedback": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+          ],
+          "critical_issues": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+          ],
+          "lesson": "Cite supplied source URLs or valid evidence paths next to factual claims, and do not invent source references.",
+          "passed": false
+        },
+        {
+          "iteration": 2,
+          "draft_analysis": "In Q2 2026, DEMO reported a revenue of $120 million, marking a 20% increase from $100 million in Q2 2025. This represents a significant growth in revenue compared to the prior quarter. The company's operating income for this period was $12 million, yielding an operating margin of 10%, indicating that the operational efficiency has improved slightly over the past two quarters. The closing price of DEMO increased by 10% from $40 on August 31 to $44 on September 30, reflecting a positive performance but without adjustments for dividends and corporate actions. Supplier delays were mentioned as a potential cost driver, although their exact financial impact remains uncertain. While there is no provided management forecast or price target, these factors limit the ability to predict future returns accurately.",
+          "scores": {
+            "evidence_support": 0,
+            "completeness": 2,
+            "consistency": 2,
+            "uncertainty": 1,
+            "clarity": 2
+          },
+          "model_evaluation": {
+            "scores": {
+              "evidence_support": 2,
+              "completeness": 2,
+              "consistency": 2,
+              "uncertainty": 1,
+              "clarity": 2
+            },
+            "feedback": [],
+            "critical_issues": [],
+            "lesson": ""
+          },
+          "citation_check": {
+            "recognized_references": [],
+            "unknown_references": [],
+            "issues": [
+              "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+            ],
+            "passed": false,
+            "scope": "Minimum citation presence and reference validity only."
+          },
+          "content_check": {
+            "applied": true,
+            "checks": [
+              "Minimum coverage of computed percentage values.",
+              "Flag missing-data claims about available benchmark metrics.",
+              "Flag the observed unsupported prior-income comparison."
+            ],
+            "issues": [],
+            "passed": true,
+            "scope": "Narrow benchmark checks. Passing is not proof that every claim, calculation association, or citation is correct."
+          },
+          "lesson_origin": "rule-derived from observed citation failure",
+          "total_score": 7,
+          "feedback": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+          ],
+          "critical_issues": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+          ],
+          "lesson": "Cite supplied source URLs or valid evidence paths next to factual claims, and do not invent source references.",
+          "passed": false
+        }
+      ],
+      "saved_lesson": {
+        "lesson_id": "e7c0e85b-ff33-49e4-af1e-dec1f6bcc28c",
+        "ticker": "DEMO",
+        "lesson": "Cite supplied source URLs or valid evidence paths beside factual claims; check that each cited record supports the claim, and do not invent references.",
+        "source_run_id": "4d564db8-183d-4848-b071-226d3b75038f",
+        "created_at": "2026-10-19T04:53:22.455233+00:00"
+      },
+      "initial_score": 7,
+      "revised_score": 7,
+      "passed": false,
+      "revisions_completed": 2
+    },
+    {
+      "run_number": 2,
+      "initial_draft": "Summary:\nYear-over-Year Revenue Growth: +10% (from $100 million in Q2 2025 to $120 million in Q2 2026)\nOperating Margin Change: -20% (from 12% in Q2 2025 to 10% in Q2 2026)\nClosing Price Difference: +4%\nNews Risk: Supplier delays could increase near-term costs. Impact not quantified.\nLimitations of Evidence:\n1. Data sources are fictional, which may not reflect real-world conditions.\n2. There's no information on dividend payments or corporate actions.\n3. Earnings forecast is missing, making it difficult to assess future performance accurately.\n4. Sentiment analysis indicates a negative outlook due to a single news item, but this doesn't provide comprehensive context.",
+      "revised_analysis": "Summary:\n  Year-over-Year Revenue Growth: +10% (from $100 million in Q2 2025 to $120 million in Q2 2026)\n  Operating Margin Change: -20% (from 12% in Q2 2025 to 10% in Q2 2026)\n  Closing Price Difference: +4%\n  News Risk: Supplier delays could increase near-term costs. Impact not quantified.\n  Limitations of Evidence:\n  1. Data sources are fictional, which may not reflect real-world conditions.\n  2. There's no information on dividend payments or corporate actions.\n  3. Earnings forecast is missing, making it difficult to assess future performance accurately.\n  4. Sentiment analysis indicates a negative outlook due to a single news item, but this doesn't provide comprehensive context.",
+      "revision_history": [
+        {
+          "iteration": 0,
+          "draft_analysis": "Summary:\nYear-over-Year Revenue Growth: +10% (from $100 million in Q2 2025 to $120 million in Q2 2026)\nOperating Margin Change: -20% (from 12% in Q2 2025 to 10% in Q2 2026)\nClosing Price Difference: +4%\nNews Risk: Supplier delays could increase near-term costs. Impact not quantified.\nLimitations of Evidence:\n1. Data sources are fictional, which may not reflect real-world conditions.\n2. There's no information on dividend payments or corporate actions.\n3. Earnings forecast is missing, making it difficult to assess future performance accurately.\n4. Sentiment analysis indicates a negative outlook due to a single news item, but this doesn't provide comprehensive context.",
+          "scores": {
+            "evidence_support": 0,
+            "completeness": 1,
+            "consistency": 1,
+            "uncertainty": 1,
+            "clarity": 2
+          },
+          "model_evaluation": {
+            "scores": {
+              "evidence_support": 1,
+              "completeness": 1,
+              "consistency": 1,
+              "uncertainty": 1,
+              "clarity": 2
+            },
+            "feedback": [],
+            "critical_issues": [],
+            "lesson": ""
+          },
+          "citation_check": {
+            "recognized_references": [],
+            "unknown_references": [],
+            "issues": [
+              "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+            ],
+            "passed": false,
+            "scope": "Minimum citation presence and reference validity only."
+          },
+          "content_check": {
+            "applied": true,
+            "checks": [
+              "Minimum coverage of computed percentage values.",
+              "Flag missing-data claims about available benchmark metrics.",
+              "Flag the observed unsupported prior-income comparison."
+            ],
+            "issues": [
+              {
+                "criterion": "completeness",
+                "message": "Include the supported 20% value for revenue growth. Show its calculation."
+              }
+            ],
+            "passed": false,
+            "scope": "Narrow benchmark checks. Passing is not proof that every claim, calculation association, or citation is correct."
+          },
+          "lesson_origin": "rule-derived from observed citation failure",
+          "total_score": 5,
+          "feedback": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims.",
+            "Include the supported 20% value for revenue growth. Show its calculation."
+          ],
+          "critical_issues": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims.",
+            "Include the supported 20% value for revenue growth. Show its calculation."
+          ],
+          "lesson": "Cite supplied source URLs or valid evidence paths next to factual claims, and do not invent source references.",
+          "passed": false
+        },
+        {
+          "iteration": 1,
+          "draft_analysis": "Summary:\n  Year-over-Year Revenue Growth: +10% (from $100 million in Q2 2025 to $120 million in Q2 2026)\n  Operating Margin Change: -20% (from 12% in Q2 2025 to 10% in Q2 2026)\n  Closing Price Difference: +4%\n  News Risk: Supplier delays could increase near-term costs. Impact not quantified.\n  Limitations of Evidence:\n  1. Data sources are fictional, which may not reflect real-world conditions.\n  2. There's no information on dividend payments or corporate actions.\n  3. Earnings forecast is missing, making it difficult to assess future performance accurately.\n  4. Sentiment analysis indicates a negative outlook due to a single news item, but this doesn't provide comprehensive context.",
+          "scores": {
+            "evidence_support": 0,
+            "completeness": 1,
+            "consistency": 1,
+            "uncertainty": 1,
+            "clarity": 2
+          },
+          "model_evaluation": {
+            "scores": {
+              "evidence_support": 1,
+              "completeness": 1,
+              "consistency": 1,
+              "uncertainty": 1,
+              "clarity": 2
+            },
+            "feedback": [],
+            "critical_issues": [],
+            "lesson": ""
+          },
+          "citation_check": {
+            "recognized_references": [],
+            "unknown_references": [],
+            "issues": [
+              "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+            ],
+            "passed": false,
+            "scope": "Minimum citation presence and reference validity only."
+          },
+          "content_check": {
+            "applied": true,
+            "checks": [
+              "Minimum coverage of computed percentage values.",
+              "Flag missing-data claims about available benchmark metrics.",
+              "Flag the observed unsupported prior-income comparison."
+            ],
+            "issues": [
+              {
+                "criterion": "completeness",
+                "message": "Include the supported 20% value for revenue growth. Show its calculation."
+              }
+            ],
+            "passed": false,
+            "scope": "Narrow benchmark checks. Passing is not proof that every claim, calculation association, or citation is correct."
+          },
+          "lesson_origin": "rule-derived from observed citation failure",
+          "total_score": 5,
+          "feedback": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims.",
+            "Include the supported 20% value for revenue growth. Show its calculation."
+          ],
+          "critical_issues": [
+            "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims.",
+            "Include the supported 20% value for revenue growth. Show its calculation."
+          ],
+          "lesson": "Cite supplied source URLs or valid evidence paths next to factual claims, and do not invent source references.",
+          "passed": false
+        }
+      ],
+      "saved_lesson": {
+        "lesson_id": "e7c0e85b-ff33-49e4-af1e-dec1f6bcc28c",
+        "ticker": "DEMO",
+        "lesson": "Cite supplied source URLs or valid evidence paths beside factual claims; check that each cited record supports the claim, and do not invent references.",
+        "source_run_id": "4d564db8-183d-4848-b071-226d3b75038f",
+        "created_at": "2026-10-19T04:53:22.455233+00:00"
+      },
+      "initial_score": 5,
+      "revised_score": 5,
+      "passed": false,
+      "revisions_completed": 1
+    }
+  ],
+  "workflow_checks": {
+    "run_1_initial_failure_detected": true,
+    "run_1_revision_attempted": true,
+    "run_1_changed_draft_evaluated": true,
+    "run_1_process_lesson_saved": true,
+    "run_1_lesson_read_from_disk": true,
+    "run_2_retrieved_run_1_lesson": true,
+    "run_2_plan_received_run_1_lesson": true,
+    "run_2_generator_received_run_1_lesson": true,
+    "all_workflow_checks_passed": true
+  },
+  "quality_checks": {
+    "run_1_final_passed": false,
+    "run_2_final_passed": false,
+    "run_1_score_increased": false,
+    "run_2_score_increased": false,
+    "both_final_analyses_passed": false
+  }
+}

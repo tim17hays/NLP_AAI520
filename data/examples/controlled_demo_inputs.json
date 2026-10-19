@@ -1,0 +1,96 @@
+{
+  "DEMO_QUESTION": "Summarize year-over-year Q2 revenue growth, Q2 operating margin, the change between the supplied closing prices, a news-related risk, and the limitations of the evidence.",
+  "SAMPLE_CONTEXT": {
+    "ticker": "DEMO",
+    "research_question": "Summarize year-over-year Q2 revenue growth, Q2 operating margin, the change between the supplied closing prices, a news-related risk, and the limitations of the evidence.",
+    "specialists": [
+      "market",
+      "earnings",
+      "news"
+    ],
+    "evidence": {
+      "market": {
+        "tool": "market_snapshot",
+        "ticker": "DEMO",
+        "data": {
+          "currency": "USD",
+          "first_close": 40,
+          "latest_close": 44,
+          "start_date": "2026-08-31",
+          "as_of": "2026-09-30",
+          "dividends_and_corporate_actions": "not supplied"
+        },
+        "sources": [
+          {
+            "name": "Fictional closing-price record",
+            "url": "https://example.com/fictional-demo/prices",
+            "accessed_at": "2026-10-01T00:00:00+00:00"
+          }
+        ],
+        "errors": []
+      },
+      "earnings": {
+        "tool": "financial_snapshot",
+        "ticker": "DEMO",
+        "data": {
+          "currency": "USD",
+          "unit": "million",
+          "current_period": "Q2 2026",
+          "previous_period": "Q2 2025",
+          "current_revenue": 120,
+          "previous_revenue": 100,
+          "operating_income": 12,
+          "management_forecast": null
+        },
+        "sources": [
+          {
+            "name": "Fictional classroom financial statement",
+            "url": "https://example.com/fictional-demo/financials",
+            "accessed_at": "2026-10-01T00:00:00+00:00"
+          }
+        ],
+        "errors": []
+      },
+      "news": {
+        "ticker": "DEMO",
+        "workflow": [
+          "ingest",
+          "preprocess",
+          "classify_finbert",
+          "extract",
+          "summarize"
+        ],
+        "items": [
+          {
+            "ticker": "DEMO",
+            "title": "Fictional DEMO reports supplier delays",
+            "summary": "Supplier delays could increase near-term costs. The impact is not quantified. No stock-price target is supplied.",
+            "publisher": "Fictional classroom source",
+            "url": "https://example.com/fictional-demo/news",
+            "published_at": "2026-09-25T00:00:00+00:00",
+            "sentiment": "negative",
+            "sentiment_score": 0.9,
+            "extracted_facts": [
+              "Supplier delays could increase near-term costs."
+            ],
+            "source": {
+              "name": "Fictional classroom source",
+              "url": "https://example.com/fictional-demo/news",
+              "accessed_at": "2026-10-01T00:00:00+00:00"
+            }
+          }
+        ],
+        "summary": "One fictional article about supplier delays.",
+        "errors": []
+      }
+    }
+  },
+  "FLAWED_DRAFT": "DEMO's revenue doubled to USD 120 million in Q2 2026 and its operating\nmargin reached 40%. Its share price rose 20% between August 31 and\nSeptember 30. There are no meaningful risks. A 25% return next month is guaranteed.",
+  "REFERENCE_ANALYSIS": "DEMO's Q2 2026 revenue was USD 120 million versus USD 100 million in Q2 2025,\na 20% increase: (120 - 100) / 100 * 100. Operating income of USD 12 million\nimplies an operating margin of 10%: 12 / 120 * 100. [evidence.earnings]\n\nThe closing price rose from USD 40 on August 31 to USD 44 on September 30,\n2026, a 10% price change. This is not an adjusted total-return calculation:\ndividend and corporate-action information was not supplied. [evidence.market]\n\nSupplier delays could increase near-term costs; their financial effect is not\nquantified. [evidence.news.items[0]] No management forecast or price target is\nprovided. [evidence.earnings; evidence.news.items[0]] These limited inputs do\nnot support guaranteed profits or a forecast of next month's return.",
+  "DEMO_LESSON": "Check percentage calculations against the supplied values, cite the evidence, and state missing information before making a conclusion.",
+  "provenance": {
+    "author": "Ashley Marx",
+    "source_notebook": "notebooks/evaluation_revision_memory.ipynb",
+    "evidence_mode": "fictional classroom benchmark; not actual company results"
+  }
+}

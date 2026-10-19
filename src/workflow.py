@@ -73,6 +73,8 @@ def run_two_run_experiment(
         for lesson in runs[1]["lessons_used"]
     )
     revisions_exercised = any(run["revisions_completed"] > 0 for run in runs)
+    workflow_demonstrated = new_lesson_used and revisions_exercised
+    analyses_accepted = all(run["passed"] for run in runs)
     return {
         "experiment_id": experiment_id,
         "execution_mode": execution_mode,
@@ -80,9 +82,10 @@ def run_two_run_experiment(
         "run_files": files,
         "new_run_one_lesson_used_in_run_two": new_lesson_used,
         "revision_exercised": revisions_exercised,
+        "workflow_demonstrated": workflow_demonstrated,
+        "analyses_accepted": analyses_accepted,
         "demonstration_complete": (
-            new_lesson_used and revisions_exercised
-            and all(run["passed"] for run in runs)
+            workflow_demonstrated and analyses_accepted
         ),
     }
 
