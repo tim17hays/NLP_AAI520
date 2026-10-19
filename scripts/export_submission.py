@@ -21,7 +21,8 @@ def render_notebook(notebook):
       pre { font-size: 9px; }
     }
     </style>'''
-    return body.replace('</head>', style + '</head>')
+    rendered = body.replace('</head>', style + '</head>')
+    return '\n'.join(line.rstrip() for line in rendered.splitlines()) + '\n'
 
 
 def main():
