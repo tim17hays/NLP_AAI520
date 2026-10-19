@@ -7793,7 +7793,20 @@ a.anchor-link {
     white-space: normal;
   }
 </style>
-<!-- End of mermaid configuration --></head>
+<!-- End of mermaid configuration --><style>
+    .jp-Notebook { max-width: 1150px; margin: auto; }
+    pre, .jp-RenderedText pre, .jp-InputArea-editor pre {
+      white-space: pre-wrap !important; overflow-wrap: anywhere !important;
+      word-break: normal !important;
+    }
+    .jp-RenderedHTMLCommon table { max-width: 100%; }
+    @media print {
+      @page { size: A4; margin: 15mm; }
+      .jp-Notebook { width: 100%; max-width: 100%; padding: 0; }
+      .jp-InputArea, .jp-OutputArea { overflow: visible !important; }
+      pre { font-size: 9px; }
+    }
+    </style></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=final-00">
@@ -7805,6 +7818,7 @@ a.anchor-link {
 <h1 id="Multi-Agent-Financial-Analysis-System">Multi-Agent Financial Analysis System<a class="anchor-link" href="#Multi-Agent-Financial-Analysis-System">¶</a></h1><p><strong>AAI-520 Final Team Project</strong><br/>
 <strong>Tim Hays · Roopleen Kaur · Ashley Marx</strong><br/>
 Repository: <a href="https://github.com/tim17hays/NLP_AAI520">tim17hays/NLP_AAI520</a><br/>
+Evaluated code branch: <a href="https://github.com/tim17hays/NLP_AAI520/tree/codex/final-team-integration">codex/final-team-integration</a><br/>
 Submission source: <code>notebooks/final_multi_agent_financial_analysis.ipynb</code></p>
 <p>This notebook combines retrieval/news, planning/routing, and evaluation/revision/memory. It distinguishes provider snapshots, synthetic offline checks, and real-model calls on fixed fictional evidence. The final analyses are research demonstrations, not investment recommendations.</p>
 <p><strong>Reading the results:</strong> Ashley's demonstrations show that a lesson was saved after Run 1 and retrieved before Run 2. The recorded runs did not demonstrate improved analysis quality. Both controlled final analyses failed acceptance; those failures remain visible.</p>
@@ -7966,7 +7980,7 @@ Submission source: <code>notebooks/final_multi_agent_financial_analysis.ipynb</c
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Code commit: 2f1d7d0db56d0bd927b780e2f0bf36d0933df593
+<pre>Code commit: 310c3eb349314c63fafcb12b5bf0b8f8b4644042
 Python: 3.12.14
 Execution mode: recorded-evidence audit; no new model inference
 </pre>
@@ -8916,7 +8930,7 @@ Derived benchmark calculations: [{'metric': 'revenue_change_pct', 'value': 20.0,
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>.........................ss......                                        [100%]
-31 passed, 2 skipped in 12.74s
+31 passed, 2 skipped in 8.70s
 
 </pre>
 </div>
@@ -9507,11 +9521,11 @@ Quality checks: {
 RUN 1 INITIAL DRAFT
  DEMO's Q2 2026 revenue was USD 120 million versus USD 100 million in Q2 2025,
 a 20% increase: (120 - 100) / 100 * 100. Operating income of USD 12 million
-implies an operating margin of 10%: 12 / 120 * 100. 
+implies an operating margin of 10%: 12 / 120 * 100.
 
 The closing price rose from USD 40 on August 31 to USD 44 on September 30,
 2026, a 10% price change. This is not an adjusted total-return calculation:
-dividend and corporate-action information was not supplied. 
+dividend and corporate-action information was not supplied.
 
 Supplier delays could increase near-term costs; their financial effect is not
 quantified.  No management forecast or price target is
@@ -10014,7 +10028,7 @@ These narrow rule checks do not replace a claim-by-claim manual review.
 <span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">_message</span><span class="p">,</span> <span class="n">files</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">nbformat</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">nbconvert</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTMLExporter</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scripts.export_submission</span><span class="w"> </span><span class="kn">import</span> <span class="n">render_notebook</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">zipfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZipFile</span><span class="p">,</span> <span class="n">ZIP_DEFLATED</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="n">_message</span><span class="o">.</span><span class="n">blocking_request</span><span class="p">(</span><span class="s2">"get_ipynb"</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
@@ -10026,7 +10040,7 @@ These narrow rule checks do not replace a claim-by-claim manual review.
         <span class="c1"># The current cell's output may not yet be included in Colab's snapshot.</span>
         <span class="n">ipynb_path</span> <span class="o">=</span> <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"final_multi_agent_financial_analysis.ipynb"</span>
         <span class="n">nbformat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">executed</span><span class="p">,</span> <span class="n">ipynb_path</span><span class="p">)</span>
-        <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">HTMLExporter</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">"lab"</span><span class="p">)</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">executed</span><span class="p">)</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="n">render_notebook</span><span class="p">(</span><span class="n">executed</span><span class="p">)</span>
         <span class="n">ipynb_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">".html"</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
     <span class="n">archive</span> <span class="o">=</span> <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"AAI520_final_submission_artifacts.zip"</span>
     <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">ZIP_DEFLATED</span><span class="p">)</span> <span class="k">as</span> <span class="n">bundle</span><span class="p">:</span>
@@ -10050,8 +10064,8 @@ These narrow rule checks do not replace a claim-by-claim manual review.
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>{
-  "code_commit": "2f1d7d0db56d0bd927b780e2f0bf36d0933df593",
-  "finished_at": "2026-10-19T20:07:03.265335+00:00",
+  "code_commit": "310c3eb349314c63fafcb12b5bf0b8f8b4644042",
+  "finished_at": "2026-10-19T20:14:36.283927+00:00",
   "execution_mode": "recorded_evidence_audit",
   "versions": {
     "torch": "not installed in this audit runtime",
