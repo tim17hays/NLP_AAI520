@@ -1,11 +1,17 @@
 """Render the saved executed team notebook while retaining actual failures."""
 import argparse
+import json
 from pathlib import Path
 import nbformat
 from nbconvert import HTMLExporter
 
 
 def render_notebook(notebook):
+    # Browser/Colab JSON may use line lists for cell source and output text.
+    # The canonical nbformat reader rejoins these fields without mutating the
+    # supplied snapshot or dropping model outputs/error records.
+    notebook = nbformat.reads(json.dumps(notebook), as_version=4)
+    nbformat.validate(notebook)
     body, _ = HTMLExporter(template_name='lab').from_notebook_node(notebook)
     style = '''<style>
     .jp-Notebook { max-width: 1150px; margin: auto; }

@@ -76,7 +76,7 @@ apply. Optional news-provider keys stay private.
 
 ## Latest local checks
 
-The synchronized code passes **36 tests**, with **2 opt-in live-provider tests
+The synchronized code passes **39 tests**, with **2 opt-in live-provider tests
 skipped**. All 26 evaluator function bodies match Ashley's authored notebook.
 The final notebook's 14 code cells execute locally in recorded-evidence mode
 without notebook errors. Its HTML preview is generated from those outputs.
@@ -95,3 +95,18 @@ scores, rename criteria or relax acceptance. Both calls remain in the log;
 a second invalid response still raises. Runtime/context/output-limit errors
 are not retried by this formatting recovery. Ashley's authored functions and
 prompts remain unchanged; the wrapper is applied at the integration boundary.
+
+
+## Colab HTML export recovery
+
+Colab's notebook snapshot can encode cell source and output text as lists of
+lines. `nbformat.from_dict` preserves those lists, which caused nbconvert's
+highlight preprocessor to raise a TypeError. The capture and renderer now use
+`nbformat.reads(json.dumps(snapshot), as_version=4)` to normalize through the
+canonical reader. Regression tests retain both valid output and error records
+and verify that rendering does not mutate the supplied snapshot.
+
+If this occurs in an already completed Colab run, do not repeat the model calls.
+Read the executed notebook already saved in OUTPUT_DIR with `nbformat.read`,
+render it with HTMLExporter, and ZIP/download the existing results. The model
+experiment and the final rendering step are separate completion states.
