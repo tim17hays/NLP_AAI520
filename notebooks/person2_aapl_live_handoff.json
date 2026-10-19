@@ -1,0 +1,452 @@
+{
+  "ticker": "AAPL",
+  "research_question": "Summarize Apple's market performance, financial metrics, and recent news.",
+  "specialists": [
+    "market",
+    "earnings",
+    "news"
+  ],
+  "evidence": {
+    "market": {
+      "tool": "market_snapshot",
+      "ticker": "AAPL",
+      "data": {
+        "period": "1mo",
+        "as_of": "2026-10-16 00:00:00-04:00",
+        "latest_close": 343.46,
+        "period_return_pct": 1.92,
+        "observations": 22
+      },
+      "sources": [
+        {
+          "name": "Yahoo Finance historical prices",
+          "url": "https://finance.yahoo.com/quote/AAPL/history",
+          "accessed_at": "2026-10-17T14:55:56.525717+00:00"
+        }
+      ],
+      "errors": []
+    },
+    "earnings": {
+      "tool": "financial_snapshot",
+      "ticker": "AAPL",
+      "data": {
+        "totalRevenue": 466822987776,
+        "grossProfits": 227123003392,
+        "ebitda": 167959003136,
+        "netIncomeToCommon": 128929996800,
+        "trailingPE": 39.38761,
+        "profitMargins": 0.27618998
+      },
+      "sources": [
+        {
+          "name": "Yahoo Finance financials",
+          "url": "https://finance.yahoo.com/quote/AAPL/financials",
+          "accessed_at": "2026-10-17T14:55:57.807477+00:00"
+        }
+      ],
+      "errors": []
+    },
+    "news": {
+      "ticker": "AAPL",
+      "workflow": [
+        "ingest",
+        "preprocess",
+        "classify_finbert",
+        "extract",
+        "summarize"
+      ],
+      "items": [
+        {
+          "ticker": "AAPL",
+          "title": "Apple's New Home Collection Gives Investors Another Reason to Remain Bullish",
+          "summary": "",
+          "publisher": "Motley Fool",
+          "url": "https://finance.yahoo.com/technology/articles/apples-home-collection-gives-investors-133500850.html",
+          "published_at": "2026-10-17T13:35:00+00:00",
+          "sentiment": "positive",
+          "sentiment_score": 0.6979,
+          "extracted_facts": [
+            "Apple's New Home Collection Gives Investors Another Reason to Remain Bullish."
+          ],
+          "source": {
+            "name": "Motley Fool",
+            "url": "https://finance.yahoo.com/technology/articles/apples-home-collection-gives-investors-133500850.html",
+            "accessed_at": "2026-10-17T14:56:24.880307+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "What Happens When You Replace SCHD With JEPQ in a $945,000 Income Portfolio",
+          "summary": "",
+          "publisher": "24/7 Wall St.",
+          "url": "https://finance.yahoo.com/markets/options/articles/happens-replace-schd-jepq-945-121357944.html",
+          "published_at": "2026-10-17T12:13:57+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.8577,
+          "extracted_facts": [
+            "What Happens When You Replace SCHD With JEPQ in a $945,000 Income Portfolio."
+          ],
+          "source": {
+            "name": "24/7 Wall St.",
+            "url": "https://finance.yahoo.com/markets/options/articles/happens-replace-schd-jepq-945-121357944.html",
+            "accessed_at": "2026-10-17T14:56:24.891011+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Apple, Salesforce Lead Five Stocks Near Buy Points As Market Struggles",
+          "summary": "",
+          "publisher": "Investor's Business Daily",
+          "url": "https://finance.yahoo.com/m/2ea92b1d-49c9-3825-bb7f-1768711b7070/apple%2C-salesforce-lead-five.html",
+          "published_at": "2026-10-17T12:00:51+00:00",
+          "sentiment": "negative",
+          "sentiment_score": 0.8541,
+          "extracted_facts": [
+            "Apple, Salesforce Lead Five Stocks Near Buy Points As Market Struggles."
+          ],
+          "source": {
+            "name": "Investor's Business Daily",
+            "url": "https://finance.yahoo.com/m/2ea92b1d-49c9-3825-bb7f-1768711b7070/apple%2C-salesforce-lead-five.html",
+            "accessed_at": "2026-10-17T14:56:24.985606+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "China Is Paying People to Shop. It\u2019s a Boom for Tech.",
+          "summary": "",
+          "publisher": "Barrons.com",
+          "url": "https://finance.yahoo.com/m/89f4aa8d-4229-3933-b160-1087cd360049/china-is-paying-people-to.html",
+          "published_at": "2026-10-17T11:00:00+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.8013,
+          "extracted_facts": [
+            "China Is Paying People to Shop."
+          ],
+          "source": {
+            "name": "Barrons.com",
+            "url": "https://finance.yahoo.com/m/89f4aa8d-4229-3933-b160-1087cd360049/china-is-paying-people-to.html",
+            "accessed_at": "2026-10-17T14:56:24.995278+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Meet Warren Buffett Successor Greg Abel's Newest Investment: Bending Spoons. Should Investors Follow Suit and Buy the Stock?",
+          "summary": "",
+          "publisher": "Motley Fool",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/meet-warren-buffett-successor-greg-100200564.html",
+          "published_at": "2026-10-17T10:02:00+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.8977,
+          "extracted_facts": [
+            "Meet Warren Buffett Successor Greg Abel's Newest Investment: Bending Spoons."
+          ],
+          "source": {
+            "name": "Motley Fool",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/meet-warren-buffett-successor-greg-100200564.html",
+            "accessed_at": "2026-10-17T14:56:25.004771+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Apple's iPhone Duo Demand Tracking 'Solidly Out Of The Gate', Says Analyst As AAPL Stock Caps Off Best Week Since September Launch",
+          "summary": "",
+          "publisher": "Stocktwits",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/apples-iphone-duo-demand-tracking-091105092.html",
+          "published_at": "2026-10-17T09:11:05+00:00",
+          "sentiment": "positive",
+          "sentiment_score": 0.8292,
+          "extracted_facts": [
+            "Apple's iPhone Duo Demand Tracking 'Solidly Out Of The Gate', Says Analyst As AAPL Stock Caps Off Best Week Since September Launch."
+          ],
+          "source": {
+            "name": "Stocktwits",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apples-iphone-duo-demand-tracking-091105092.html",
+            "accessed_at": "2026-10-17T14:56:25.014111+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Apple Is Ready to Fight Britain Over iPhone Tap-to-Pay. The Fee Is What Matters",
+          "summary": "",
+          "publisher": "TIKR",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/apple-ready-fight-britain-over-081616505.html",
+          "published_at": "2026-10-17T08:16:16+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.9197,
+          "extracted_facts": [
+            "Apple Is Ready to Fight Britain Over iPhone Tap-to-Pay."
+          ],
+          "source": {
+            "name": "TIKR",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apple-ready-fight-britain-over-081616505.html",
+            "accessed_at": "2026-10-17T14:56:25.023728+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Elon Musk\u2019s Roadster, Nvidia\u2019s Space AI Push, Nadella\u2019s Security Warning: Mag 7 Voices This Week",
+          "summary": "",
+          "publisher": "Stocktwits",
+          "url": "https://finance.yahoo.com/technology/ai/articles/elon-musk-roadster-nvidia-space-024645282.html",
+          "published_at": "2026-10-17T02:46:45+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.916,
+          "extracted_facts": [
+            "Elon Musk\u2019s Roadster, Nvidia\u2019s Space AI Push, Nadella\u2019s Security Warning: Mag 7 Voices This Week."
+          ],
+          "source": {
+            "name": "Stocktwits",
+            "url": "https://finance.yahoo.com/technology/ai/articles/elon-musk-roadster-nvidia-space-024645282.html",
+            "accessed_at": "2026-10-17T14:56:25.034765+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "Will Starlink Mobile matter for Apple?",
+          "summary": "",
+          "publisher": "Investing.com",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/starlink-mobile-matter-apple-010939746.html",
+          "published_at": "2026-10-17T01:09:39+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.9351,
+          "extracted_facts": [
+            "Will Starlink Mobile matter for Apple?."
+          ],
+          "source": {
+            "name": "Investing.com",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/starlink-mobile-matter-apple-010939746.html",
+            "accessed_at": "2026-10-17T14:56:25.059561+00:00"
+          }
+        },
+        {
+          "ticker": "AAPL",
+          "title": "What Apple Holders Bought Into",
+          "summary": "",
+          "publisher": "Simply Wall St.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/apple-holders-bought-001436767.html",
+          "published_at": "2026-10-17T00:14:36+00:00",
+          "sentiment": "neutral",
+          "sentiment_score": 0.9368,
+          "extracted_facts": [
+            "What Apple Holders Bought Into."
+          ],
+          "source": {
+            "name": "Simply Wall St.",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apple-holders-bought-001436767.html",
+            "accessed_at": "2026-10-17T14:56:25.071415+00:00"
+          }
+        }
+      ],
+      "summary": "Processed 10 source-attributed news items (1 negative, 7 neutral, 2 positive). Representative headlines: Apple's New Home Collection Gives Investors Another Reason to Remain Bullish; What Happens When You Replace SCHD With JEPQ in a $945,000 Income Portfolio; Apple, Salesforce Lead Five Stocks Near Buy Points As Market Struggles.",
+      "errors": [],
+      "trace": {
+        "ingest": {
+          "input_count": 10
+        },
+        "preprocess": {
+          "retained_count": 10,
+          "records": [
+            {
+              "text": "Apple's New Home Collection Gives Investors Another Reason to Remain Bullish.",
+              "url": "https://finance.yahoo.com/technology/articles/apples-home-collection-gives-investors-133500850.html"
+            },
+            {
+              "text": "What Happens When You Replace SCHD With JEPQ in a $945,000 Income Portfolio.",
+              "url": "https://finance.yahoo.com/markets/options/articles/happens-replace-schd-jepq-945-121357944.html"
+            },
+            {
+              "text": "Apple, Salesforce Lead Five Stocks Near Buy Points As Market Struggles.",
+              "url": "https://finance.yahoo.com/m/2ea92b1d-49c9-3825-bb7f-1768711b7070/apple%2C-salesforce-lead-five.html"
+            },
+            {
+              "text": "China Is Paying People to Shop. It\u2019s a Boom for Tech..",
+              "url": "https://finance.yahoo.com/m/89f4aa8d-4229-3933-b160-1087cd360049/china-is-paying-people-to.html"
+            },
+            {
+              "text": "Meet Warren Buffett Successor Greg Abel's Newest Investment: Bending Spoons. Should Investors Follow Suit and Buy the Stock?.",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/meet-warren-buffett-successor-greg-100200564.html"
+            },
+            {
+              "text": "Apple's iPhone Duo Demand Tracking 'Solidly Out Of The Gate', Says Analyst As AAPL Stock Caps Off Best Week Since September Launch.",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/apples-iphone-duo-demand-tracking-091105092.html"
+            },
+            {
+              "text": "Apple Is Ready to Fight Britain Over iPhone Tap-to-Pay. The Fee Is What Matters.",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/apple-ready-fight-britain-over-081616505.html"
+            },
+            {
+              "text": "Elon Musk\u2019s Roadster, Nvidia\u2019s Space AI Push, Nadella\u2019s Security Warning: Mag 7 Voices This Week.",
+              "url": "https://finance.yahoo.com/technology/ai/articles/elon-musk-roadster-nvidia-space-024645282.html"
+            },
+            {
+              "text": "Will Starlink Mobile matter for Apple?.",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/starlink-mobile-matter-apple-010939746.html"
+            },
+            {
+              "text": "What Apple Holders Bought Into.",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/apple-holders-bought-001436767.html"
+            }
+          ]
+        },
+        "classify_finbert": [
+          {
+            "url": "https://finance.yahoo.com/technology/articles/apples-home-collection-gives-investors-133500850.html",
+            "label": "positive",
+            "score": 0.6979
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/options/articles/happens-replace-schd-jepq-945-121357944.html",
+            "label": "neutral",
+            "score": 0.8577
+          },
+          {
+            "url": "https://finance.yahoo.com/m/2ea92b1d-49c9-3825-bb7f-1768711b7070/apple%2C-salesforce-lead-five.html",
+            "label": "negative",
+            "score": 0.8541
+          },
+          {
+            "url": "https://finance.yahoo.com/m/89f4aa8d-4229-3933-b160-1087cd360049/china-is-paying-people-to.html",
+            "label": "neutral",
+            "score": 0.8013
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/meet-warren-buffett-successor-greg-100200564.html",
+            "label": "neutral",
+            "score": 0.8977
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apples-iphone-duo-demand-tracking-091105092.html",
+            "label": "positive",
+            "score": 0.8292
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apple-ready-fight-britain-over-081616505.html",
+            "label": "neutral",
+            "score": 0.9197
+          },
+          {
+            "url": "https://finance.yahoo.com/technology/ai/articles/elon-musk-roadster-nvidia-space-024645282.html",
+            "label": "neutral",
+            "score": 0.916
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/starlink-mobile-matter-apple-010939746.html",
+            "label": "neutral",
+            "score": 0.9351
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apple-holders-bought-001436767.html",
+            "label": "neutral",
+            "score": 0.9368
+          }
+        ],
+        "extract": [
+          {
+            "url": "https://finance.yahoo.com/technology/articles/apples-home-collection-gives-investors-133500850.html",
+            "facts": [
+              "Apple's New Home Collection Gives Investors Another Reason to Remain Bullish."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/options/articles/happens-replace-schd-jepq-945-121357944.html",
+            "facts": [
+              "What Happens When You Replace SCHD With JEPQ in a $945,000 Income Portfolio."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/m/2ea92b1d-49c9-3825-bb7f-1768711b7070/apple%2C-salesforce-lead-five.html",
+            "facts": [
+              "Apple, Salesforce Lead Five Stocks Near Buy Points As Market Struggles."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/m/89f4aa8d-4229-3933-b160-1087cd360049/china-is-paying-people-to.html",
+            "facts": [
+              "China Is Paying People to Shop."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/meet-warren-buffett-successor-greg-100200564.html",
+            "facts": [
+              "Meet Warren Buffett Successor Greg Abel's Newest Investment: Bending Spoons."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apples-iphone-duo-demand-tracking-091105092.html",
+            "facts": [
+              "Apple's iPhone Duo Demand Tracking 'Solidly Out Of The Gate', Says Analyst As AAPL Stock Caps Off Best Week Since September Launch."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apple-ready-fight-britain-over-081616505.html",
+            "facts": [
+              "Apple Is Ready to Fight Britain Over iPhone Tap-to-Pay."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/technology/ai/articles/elon-musk-roadster-nvidia-space-024645282.html",
+            "facts": [
+              "Elon Musk\u2019s Roadster, Nvidia\u2019s Space AI Push, Nadella\u2019s Security Warning: Mag 7 Voices This Week."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/starlink-mobile-matter-apple-010939746.html",
+            "facts": [
+              "Will Starlink Mobile matter for Apple?."
+            ]
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/apple-holders-bought-001436767.html",
+            "facts": [
+              "What Apple Holders Bought Into."
+            ]
+          }
+        ],
+        "summarize": "Processed 10 source-attributed news items (1 negative, 7 neutral, 2 positive). Representative headlines: Apple's New Home Collection Gives Investors Another Reason to Remain Bullish; What Happens When You Replace SCHD With JEPQ in a $945,000 Income Portfolio; Apple, Salesforce Lead Five Stocks Near Buy Points As Market Struggles."
+      }
+    }
+  },
+  "draft_analysis": "Market Performance:\n- Recent close: $343.46 per share\n- 1-month return percentage: +1.92%\n\nFinancial Metrics:\n- Total Revenue: $466,822,987,776\n- Gross Profits: $227,123,003,392\n- EBITDA: $167,959,003,136\n- Net Income to Common Shareholders: $128,929,996,800\n\nNews:\n- Positive sentiment towards Apple's new home collection giving investors another reason to remain bullish.\n- Neutral sentiments regarding replacing certain stocks with others in an income portfolio.\n- Negative sentiments about Apple fighting against Britain over iPhone tap-to-pay fees.\n- Neutral sentiments on Elon Musk's Roadster, Nvidia's space AI push, and Microsoft's security warning.\n- Neutral sentiments on Starlink mobile potentially affecting Apple.\n\nLimitations:\n- Data sources include Yahoo Finance historical prices and financials, Motley Fool, 24/7 Wall St., Investor's Business Daily, Barrons.com, Stocktwits, Simply Wall St., Investing.com, and Simply Wall St. articles.\n- Sentiments range from neutral to positive across various topics related to Apple's products, strategies, and industry developments.",
+  "plan": {
+    "ticker": "AAPL",
+    "research_question": "Summarize Apple's market performance, financial metrics, and recent news.",
+    "specialists": [
+      "market",
+      "earnings",
+      "news"
+    ],
+    "steps": [
+      "Review retrieved lessons before collecting and drafting evidence: ['Do not invent currency, financial units, or reporting periods.', 'Cite source URLs and distinguish headlines from verified facts.']",
+      "Retrieve evidence from the market specialist.",
+      "Retrieve evidence from the earnings specialist.",
+      "Retrieve evidence from the news specialist.",
+      "Combine the retrieved evidence into a draft analysis.",
+      "Send the draft analysis and supporting evidence for evaluation."
+    ],
+    "retrieved_lessons": [
+      "Do not invent currency, financial units, or reporting periods.",
+      "Cite source URLs and distinguish headlines from verified facts."
+    ]
+  },
+  "retrieved_lessons": [
+    "Do not invent currency, financial units, or reporting periods.",
+    "Cite source URLs and distinguish headlines from verified facts."
+  ],
+  "tool_trace": [
+    {
+      "specialist": "market",
+      "tool": "market_snapshot",
+      "errors": []
+    },
+    {
+      "specialist": "earnings",
+      "tool": "financial_snapshot",
+      "errors": []
+    },
+    {
+      "specialist": "news",
+      "tool": "news_pipeline",
+      "errors": []
+    }
+  ]
+}
