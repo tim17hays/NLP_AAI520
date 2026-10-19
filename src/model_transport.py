@@ -100,3 +100,30 @@ def with_schema_retry(call_once, call_log, criteria, max_attempts=2):
 
     call.schema_attempt_limit = max_attempts
     return call
+
+
+def recover_revision_text(text):
+    """Recover only a complete one-field text envelope; never repair scores.
+
+    A small model may emit literal newlines/quotes in its prose. Preserve that
+    prose exactly rather than guessing which characters to escape or changing
+    claims. Reject extra fields, nested objects and trailing material.
+    """
+    import re
+
+    match = re.fullmatch(
+        r'\{\s*"revised_analysis"\s*:\s*"(?P<body>[\s\S]*)"\s*\}', text
+    )
+    if match is None:
+        raise ValueError("Revision is not a complete single-text envelope.")
+    body = match.group("body")
+    if (
+        not body.strip()
+        or "\\" in body
+        or "{" in body
+        or "}" in body
+        or re.search(r'"\s*,\s*"[^"\n]*"\s*:', body)
+        or re.search(r'^\s*"[^"\n]*"\s*:', body, re.MULTILINE)
+    ):
+        raise ValueError("Ambiguous revision envelope; refusing text recovery.")
+    return {"revised_analysis": body}

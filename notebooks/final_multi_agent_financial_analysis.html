@@ -7824,6 +7824,7 @@ Submission source: <code>notebooks/final_multi_agent_financial_analysis.ipynb</c
 <p><strong>Reading the results:</strong> Ashley's demonstrations show that a lesson was saved after Run 1 and retrieved before Run 2. The recorded runs did not demonstrate improved analysis quality. Both controlled final analyses failed acceptance; those failures remain visible.</p>
 <p><strong>Execution:</strong> In Colab, choose <strong>Runtime → Change runtime type → T4 GPU</strong>, then <strong>Run all</strong> in a fresh runtime. Colab enables actual model calls by default. Local validation uses clearly labeled recorded evidence and offline checks, and does not claim a new GPU run. Save the executed notebook before exporting/submitting.</p>
 <p><strong>Revision update pending live validation:</strong> The evaluator/revision prompts and payload now include focused corrections, computed metric references and whole-answer contradiction instructions. Saved outputs below predate this update. Run all in a fresh GPU Colab runtime to measure the updated behavior; historical outputs are not validation of these changes.</p>
+<p><strong>Formatting recovery:</strong> A later partial Colab run exposed unescaped quotes/newlines in a revision response. The parser now supports narrowly scoped, logged recovery of that complete single-field text envelope. The original partial run is not a successful two-run result; quality checks still apply after recovery.</p>
 </div>
 </div>
 </div>

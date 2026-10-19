@@ -170,17 +170,28 @@ def parse_qwen_response(text, task):
     try:
         value = json.loads(text)
     except json.JSONDecodeError as exc:
-        if "Invalid control character" not in exc.msg:
-            raise ValueError(
-                "Invalid model JSON; inspect MODEL_CALL_LOG."
-            ) from exc
         try:
-            value = json.loads(text, strict=False)
+            if "Invalid control character" in exc.msg:
+                value = json.loads(text, strict=False)
+                changes.append("Decoded literal control characters in JSON strings.")
+            else:
+                raise exc
         except json.JSONDecodeError as repair_error:
-            raise ValueError(
-                "Invalid model JSON; inspect MODEL_CALL_LOG."
-            ) from repair_error
-        changes.append("Decoded literal control characters in JSON strings.")
+            if task != "revise":
+                raise ValueError(
+                    "Invalid model JSON; inspect MODEL_CALL_LOG."
+                ) from repair_error
+            from src.model_transport import recover_revision_text
+            try:
+                value = recover_revision_text(text)
+            except ValueError as recovery_error:
+                raise ValueError(
+                    "Invalid model JSON; inspect MODEL_CALL_LOG."
+                ) from recovery_error
+            changes.append(
+                "Recovered complete single-field revision envelope; "
+                "preserved literal prose characters without claim repair."
+            )
 
     if task == "evaluate":
         result = validate_evaluation(value)

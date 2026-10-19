@@ -127,3 +127,20 @@ final citations, contradictions, acceptance, score changes and lesson delivery.
 Do not replace or relabel the original baseline as a new execution.
 
 Approved-update offline validation: **42 passed, 2 optional live-provider tests skipped**. This is not a new GPU quality result.
+
+
+### Run 2 malformed revision response
+The supplied `controlled_demo_d9758fc1-380e-4a60-a721-33eb98eead3b`
+archive records a completed Run 1 and an incomplete Run 2. Both failed Run 2
+calls were revisions with identical literal newlines and unescaped headline
+quotes inside a single `revised_analysis` string; neither was truncated.
+A regression fixture preserves that exact response. Recovery is limited to
+a complete one-field text envelope without backslashes, braces, extra keys
+or trailing material. It preserves prose and records normalization alongside
+the raw response. Evaluation JSON remains strict; scoring and acceptance do
+not change. The recovered historical draft still fails citation checks. Its
+contradiction remains in the text; the existing narrow benchmark checker
+misses this phrasing and manual review is still necessary. This fixes that formatting failure, not the draft’s substantive flaws.
+A new complete GPU execution is still required.
+
+Formatting-recovery regression validation: **49 passed, 2 optional live-provider tests skipped**; seven exact-response/invalid-envelope tests also passed in isolation. No new GPU execution was performed.
