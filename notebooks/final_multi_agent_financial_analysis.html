@@ -7980,7 +7980,7 @@ Submission source: <code>notebooks/final_multi_agent_financial_analysis.ipynb</c
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Code commit: 310c3eb349314c63fafcb12b5bf0b8f8b4644042
+<pre>Code commit: 37f985826bdd388d473e3aa280c9c8e4b292fa06
 Python: 3.12.14
 Execution mode: recorded-evidence audit; no new model inference
 </pre>
@@ -8003,6 +8003,11 @@ Execution mode: recorded-evidence audit; no new model inference
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.planning</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResearchPlanner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.llm</span><span class="w"> </span><span class="kn">import</span> <span class="n">MODEL_NAME</span><span class="p">,</span> <span class="n">generate_draft</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">evaluation_memory</span> <span class="k">as</span> <span class="n">evaluation</span>
+<span class="c1"># Reuse loaded model weights but refresh the small response-handling modules.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">model_transport</span>
+<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">model_transport</span><span class="p">)</span>
+<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">evaluation</span><span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.evaluation_memory</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">qwen_call_model</span><span class="p">,</span> <span class="n">run_research_with_memory</span><span class="p">,</span> <span class="n">MODEL_CALL_LOG</span><span class="p">,</span> <span class="n">MAX_REVISIONS</span><span class="p">,</span>
     <span class="n">check_citations</span><span class="p">,</span> <span class="n">derived_calculations</span><span class="p">,</span> <span class="n">read_lessons</span><span class="p">,</span> <span class="n">utc_now</span><span class="p">,</span> <span class="n">json_copy</span><span class="p">,</span> <span class="n">require_text</span><span class="p">,</span>
@@ -8012,6 +8017,8 @@ Execution mode: recorded-evidence audit; no new model inference
 <span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">"outputs/final_submission"</span>
 <span class="n">OUTPUT_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Draft model:"</span><span class="p">,</span> <span class="n">MODEL_NAME</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">qwen_call_model</span><span class="p">,</span> <span class="s2">"schema_attempt_limit"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"Refresh the repository/imports before running models."</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Structured response attempts per call:"</span><span class="p">,</span> <span class="n">qwen_call_model</span><span class="o">.</span><span class="n">schema_attempt_limit</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Planner signature:"</span><span class="p">,</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">ResearchPlanner</span><span class="o">.</span><span class="n">execute</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Revision limit:"</span><span class="p">,</span> <span class="n">MAX_REVISIONS</span><span class="p">)</span>
 </pre></div>
@@ -8027,6 +8034,7 @@ Execution mode: recorded-evidence audit; no new model inference
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Draft model: Qwen/Qwen2.5-1.5B-Instruct
+Structured response attempts per call: 2
 Planner signature: (self, ticker: 'str', research_question: 'str', lessons: 'list | None' = None) -&gt; 'dict[str, Any]'
 Revision limit: 2
 </pre>
@@ -8556,6 +8564,7 @@ Limitations:
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="5.-Evaluation,-revision-and-persistent-memory-%E2%80%94-Ashley">5. Evaluation, revision and persistent memory — Ashley<a class="anchor-link" href="#5.-Evaluation,-revision-and-persistent-memory-%E2%80%94-Ashley">¶</a></h2><p>The evaluator scores evidence support, completeness, consistency, uncertainty and clarity from 0–2. Passing requires at least 8/10, no zero criterion, full evidence support and consistency, and no critical issues. Citation checks reject missing/unknown references. Narrow benchmark checks validate selected computed facts; they are not general factual verification.</p>
 <p>The loop stops on acceptance, at two revisions, or when a revised draft is unchanged. It never converts a failure into a pass for presentation. Process lessons can be saved after a verified failure without endorsing the failed financial claims. Duplicate lessons reuse an existing record; <code>saved_lesson</code> being non-null does not mean a second unique lesson was created.</p>
+<p>The shared transport permits one additional model attempt when JSON/schema validation fails. The retry receives the original evidence plus the exact validation error and raw invalid response. Both attempts remain logged. Missing criteria are never supplied by Python, and two invalid attempts still stop the run. This format retry does not change scoring or count as an analysis revision.</p>
 </div>
 </div>
 </div>
@@ -8929,8 +8938,8 @@ Derived benchmark calculations: [{'metric': 'revenue_change_pct', 'value': 20.0,
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>.........................ss......                                        [100%]
-31 passed, 2 skipped in 8.70s
+<pre>..............................ss......                                   [100%]
+36 passed, 2 skipped in 0.06s
 
 </pre>
 </div>
@@ -10064,8 +10073,8 @@ These narrow rule checks do not replace a claim-by-claim manual review.
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>{
-  "code_commit": "310c3eb349314c63fafcb12b5bf0b8f8b4644042",
-  "finished_at": "2026-10-19T20:14:36.283927+00:00",
+  "code_commit": "37f985826bdd388d473e3aa280c9c8e4b292fa06",
+  "finished_at": "2026-10-19T20:44:01.477046+00:00",
   "execution_mode": "recorded_evidence_audit",
   "versions": {
     "torch": "not installed in this audit runtime",

@@ -76,7 +76,7 @@ apply. Optional news-provider keys stay private.
 
 ## Latest local checks
 
-The synchronized code passes **31 tests**, with **2 opt-in live-provider tests
+The synchronized code passes **36 tests**, with **2 opt-in live-provider tests
 skipped**. All 26 evaluator function bodies match Ashley's authored notebook.
 The final notebook's 14 code cells execute locally in recorded-evidence mode
 without notebook errors. Its HTML preview is generated from those outputs.
