@@ -110,3 +110,20 @@ If this occurs in an already completed Colab run, do not repeat the model calls.
 Read the executed notebook already saved in OUTPUT_DIR with `nbformat.read`,
 render it with HTMLExporter, and ZIP/download the existing results. The model
 experiment and the final rendering step are separate completion states.
+
+
+## Approved revision guidance update — October 19, 2026
+Tim approved changes to Ashley’s source notebook and synchronized evaluator
+module: a structured correction checklist, dynamically computed metric guidance
+with supplied evidence references, concise revision instructions, and explicit
+whole-answer contradiction checking. Acceptance thresholds, failure checks,
+memory policy and the two-revision limit are unchanged. Earlier statements
+about unchanged authored prompts describe the pre-update integration.
+
+Existing GPU outputs are historical baseline results, not validation of this
+update. Run `notebooks/final_multi_agent_financial_analysis.ipynb` with Run all
+in a fresh GPU Colab runtime on `codex/final-team-integration`, then compare
+final citations, contradictions, acceptance, score changes and lesson delivery.
+Do not replace or relabel the original baseline as a new execution.
+
+Approved-update offline validation: **42 passed, 2 optional live-provider tests skipped**. This is not a new GPU quality result.

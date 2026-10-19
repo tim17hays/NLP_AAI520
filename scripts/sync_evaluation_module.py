@@ -14,7 +14,8 @@ header = '''"""Ashley Marx's current evaluator, revision loop and persistent les
 
 Synchronized from the authored notebook, including citation/benchmark checks
 and rule-derived process lessons from verified failures. Function bodies and
-prompts are preserved. Importing this module does not mount Drive/load models.
+prompts match the source notebook, including Tim-approved revision guidance.
+Importing this module does not mount Drive/load models.
 """
 import copy
 import json
@@ -37,7 +38,7 @@ source = header + helpers + '\n\n' + '\n\n'.join(
     ''.join(nb['cells'][index]['source']) for index in (5, 7, 9, 11, 13, 15)
 ) + '\n'
 source += """
-# Integration transport hardening; authored functions/prompts above are unchanged.
+# Integration transport hardening; source notebook functions/prompts above are synchronized.
 from .model_transport import with_schema_retry
 
 qwen_call_model = with_schema_retry(qwen_call_model, MODEL_CALL_LOG, CRITERIA)
