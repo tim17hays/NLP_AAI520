@@ -1,5 +1,8 @@
 # Integration handoff — October 12, 2026
 
+Historical snapshot. For combined code and current remaining work, see
+[FINAL_READINESS.md](FINAL_READINESS.md).
+
 ## Verified branch state
 
 Fetched GitHub on October 12. `main` is `b7cad36` (Tim's retrieval hardening).

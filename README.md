@@ -2,7 +2,7 @@
 
 AAI-520 final team project by Tim Hays, Roopleen Kaur, and Ashley Marx.
 
-The project will build a multi-agent workflow for a single-stock research run. The system will retrieve market and financial data plus news, plan and route research tasks, produce an evidence-based draft analysis, evaluate and revise the draft, and save reusable lessons for a later run.
+The project implements a multi-agent workflow for a single-stock research run. The system will retrieve market and financial data plus news, plan and route research tasks, produce an evidence-based draft analysis, evaluate and revise the draft, and save reusable lessons for a later run.
 
 ## Team roles
 
@@ -12,7 +12,7 @@ The project will build a multi-agent workflow for a single-stock research run. T
 | Roopleen Kaur | Research planning, routing, specialist integration, notebook assembly |
 | Ashley Marx | Evaluation, revision loop, memory, final export and layout review |
 
-## Planned workflow
+## Research workflow
 
 1. Accept a stock ticker and research request.
 2. Plan the work and route requests to market, financial, earnings, and news specialists.
@@ -83,38 +83,105 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Project status
+## Shared team version
 
-As of October 12, 2026, retrieval/news and planning/Qwen drafting are implemented.
-The integration branch adds lessons to planning/drafting and source-linked traces.
-Ashley's evaluator/revision/memory code and actual two-run GPU validation still
-need to be integrated. See [integration handoff](docs/team/INTEGRATION_HANDOFF.md)
-for verified refs, callable examples, ownership and remaining checkpoints.
+The combined repository preserves Tim's, Roopleen's and Ashley's commits and
+original component notebooks. **Repository integration is complete; final live
+feedback validation and the submission notebook/export are still pending.**
+See [current readiness and ownership](docs/team/FINAL_READINESS.md).
 
-Draft generation uses Hugging Face Transformers with
-`Qwen/Qwen2.5-1.5B-Instruct`, loaded locally on CUDA; no paid LLM API key is
-required. This is distinct from `ProsusAI/finbert` for news sentiment. Large
-weights download on first use. Select a Colab GPU runtime for actual inference.
+| Component | Shared code | Author / integration |
+| --- | --- | --- |
+| Data and five-stage news chain | `src/data_tools.py`, `src/news_pipeline.py`, `src/alternative_sources.py` | Tim |
+| Planning, routing and Qwen draft | `src/planning.py`, `src/llm.py` | Roopleen, with Tim's lesson/source handoff fixes |
+| Evaluation, bounded revision and persistent memory | `src/evaluation_memory.py` | Ashley, extracted from her original notebook |
+| Shared two-run workflow and artifact logging | `src/workflow.py` | Team interface, integrated by Tim |
+
+### Run the current combined workflow
+
+Use Python 3.12 and a CUDA GPU runtime for actual Qwen inference. The model is
+`Qwen/Qwen2.5-1.5B-Instruct` through Hugging Face Transformers, with
+`ProsusAI/finbert` for news sentiment. No paid LLM API key is required. Model
+weights download on first use. Optional data-provider keys stay in `.env`.
+
+Start with [the team integration runner](notebooks/team_integration_runner.ipynb)
+in a fresh Colab GPU runtime, or run this from the repository root:
+
+```bash
+python -m src.workflow --live --ticker AAPL
+```
+
+The driver retrieves lessons before each planner call, uses the actual draft
+once, evaluates/revises, saves a valid lesson when eligible, and repeats for run
+two. It records both run JSON files and the evaluation model-call log in ignored
+`outputs/`. Memory is stored in ignored `data/processed/research_lessons.json`.
+Use `--memory PATH` for a persistent Drive location in Colab; runtime-local
+storage is temporary. Do not delete existing lessons to make a demonstration pass.
+
+Exit status 0 means both final evaluations passed, a revision was exercised, and
+a new run-one lesson reached run two. Exit status 2 after completed runs means
+that demonstration is incomplete. Runtime/model/provider failures remain errors.
+These checks do not certify factual correctness or prove memory caused an
+improvement: inspect source citations, evidence, feedback and the actual drafts.
+
+### Call individual components
 
 ```python
 from src.planning import ResearchPlanner
-result = ResearchPlanner().execute(
+from src.evaluation_memory import qwen_call_model, run_research_with_memory
+
+result = run_research_with_memory(
+    planner=ResearchPlanner(),
     ticker="AAPL",
-    research_question="Summarize market performance, financial metrics and news.",
-    lessons=["Do not infer reporting periods absent from evidence."],
+    research_question="Summarize market performance, financial metrics and news with sources.",
+    call_model=qwen_call_model,
+    memory_path="data/processed/research_lessons.json",
 )
-print(result["draft_analysis"])
+print(result["revised_analysis"])
+print(result["revision_history"])
+print(result["saved_lesson"])
 ```
 
-Tim's executed, synthetic offline handoff section is
-[the notebook](notebooks/tim_data_news_handoff.ipynb) and
-[the rendered HTML](notebooks/tim_data_news_handoff.html). It demonstrates
-intermediate news stages, deduplication, source alignment, empty retrieval and
-classifier failure, with explicit fixture labels and an AI assistance disclosure.
-Roopleen should incorporate it into the proposed final notebook at
-`notebooks/final_multi_agent_financial_analysis.ipynb` on `main`.
+For drafting alone, `ResearchPlanner().execute(ticker, research_question,
+lessons=...)` returns `draft_analysis`, `evidence`, `plan`, `retrieved_lessons`
+and `tool_trace`.
 
-Run offline checks with `python -m pytest -q`. Live provider tests are separately
-opted into with `AAI520_LIVE_TESTS=1 python -m pytest -q`; they depend on network
-access and provider availability. Offline tests use injected models and do not
-establish actual Qwen quality or FinBERT accuracy.
+### Component evidence and final notebook
+
+- [Tim: data/news notebook](notebooks/tim_data_news_handoff.ipynb) and
+  [component HTML](notebooks/tim_data_news_handoff.html).
+- [Roopleen: planner/Qwen Colab handoff](notebooks/roopleen_planner_qwen_team_handoff.ipynb)
+  and [recorded AAPL result](notebooks/person2_aapl_live_handoff.json).
+- [Ashley: evaluation/revision/memory notebook](notebooks/evaluation_revision_memory.ipynb).
+
+Original notebooks preserve their historical outputs and setup pins; use the
+shared runner for new tests of this combined code. They are not three separate
+final submissions. The final target remains
+`notebooks/final_multi_agent_financial_analysis.ipynb`, which is not assembled
+yet. Roopleen leads assembly; Ashley leads memory/evaluation verification and
+PDF/HTML export; Tim reviews integration and coordinates team approval/submission.
+
+The recorded live runs made no revisions and saved no new lesson. Ashley also
+reported that missing citations were incorrectly accepted. Those are open
+validation findings, not resolved by a passing offline suite. Retain honest
+limitations and AI assistance attribution in the final submission.
+
+## Tests
+
+```bash
+python -m pytest -q
+```
+
+Ordinary tests use injected provider/model fixtures and make no weight downloads
+or live requests. GitHub Actions runs these offline checks, including all ten
+of Ashley's acceptance groups and the actual planner-to-evaluator two-run
+interface. This verifies plumbing, not actual model quality or learned behavior.
+
+Live provider tests are opt-in and depend on provider availability:
+
+```bash
+AAI520_LIVE_TESTS=1 python -m pytest -q
+```
+
+Use the shared GPU runner for actual model integration testing. Review the
+[readiness checklist](docs/team/FINAL_READINESS.md) before final export.
