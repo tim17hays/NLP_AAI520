@@ -4,6 +4,8 @@ AAI-520 final team project by Tim Hays, Roopleen Kaur and Ashley Marx.
 
 ## Final notebook
 
+[Executed submission HTML](notebooks/final_multi_agent_financial_analysis.html) · [Executed notebook](notebooks/final_multi_agent_financial_analysis.ipynb)
+
 [Open the final notebook in Google Colab](https://colab.research.google.com/github/tim17hays/NLP_AAI520/blob/codex/final-team-integration/notebooks/final_multi_agent_financial_analysis.ipynb).
 Select **Run all**. The last cell exports the notebook as HTML and downloads a
 submission ZIP. Submit the HTML file through the team assignment link.

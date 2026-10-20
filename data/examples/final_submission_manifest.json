@@ -1,0 +1,326 @@
+{
+  "code_commit": "1f9c6c42a70bb940c35f5588a68b59613485a1ff",
+  "finished_at": "2026-10-20T01:51:13.171858+00:00",
+  "execution_mode": "recorded_evidence_audit",
+  "versions": {
+    "torch": "2.11.0+cu130",
+    "transformers": "5.20.1",
+    "yfinance": "0.2.66",
+    "requests": "2.32.4",
+    "nbformat": "5.11.1",
+    "nbconvert": "7.17.2"
+  },
+  "workflow_checks": {
+    "run_1_initial_failure_detected": true,
+    "run_1_revision_attempted": true,
+    "run_1_changed_draft_evaluated": true,
+    "run_1_process_lesson_saved": true,
+    "run_1_lesson_read_from_disk": true,
+    "run_2_retrieved_run_1_lesson": true,
+    "run_2_plan_received_run_1_lesson": true,
+    "run_2_generator_received_run_1_lesson": true,
+    "all_workflow_checks_passed": true
+  },
+  "quality_checks": {
+    "run_1_final_passed": false,
+    "run_2_final_passed": false,
+    "run_1_score_increased": false,
+    "run_2_score_increased": false,
+    "both_final_analyses_passed": false
+  },
+  "manual_findings": [
+    {
+      "run": 1,
+      "citation_check": {
+        "recognized_references": [],
+        "unknown_references": [],
+        "issues": [
+          "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+        ],
+        "passed": false,
+        "scope": "Minimum citation presence and reference validity only."
+      },
+      "benchmark_check": {
+        "applied": true,
+        "checks": [
+          "Minimum coverage of computed percentage values.",
+          "Flag missing-data claims about available benchmark metrics.",
+          "Flag the observed unsupported prior-income comparison."
+        ],
+        "issues": [],
+        "passed": true,
+        "scope": "Narrow benchmark checks. Passing is not proof that every claim, calculation association, or citation is correct."
+      }
+    },
+    {
+      "run": 2,
+      "citation_check": {
+        "recognized_references": [],
+        "unknown_references": [],
+        "issues": [
+          "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+        ],
+        "passed": false,
+        "scope": "Minimum citation presence and reference validity only."
+      },
+      "benchmark_check": {
+        "applied": true,
+        "checks": [
+          "Minimum coverage of computed percentage values.",
+          "Flag missing-data claims about available benchmark metrics.",
+          "Flag the observed unsupported prior-income comparison."
+        ],
+        "issues": [
+          {
+            "criterion": "completeness",
+            "message": "Include the supported 20% value for revenue growth. Show its calculation."
+          },
+          {
+            "criterion": "completeness",
+            "message": "Include the supported 10% value for operating margin and closing-price change. Show its calculation."
+          }
+        ],
+        "passed": false,
+        "scope": "Narrow benchmark checks. Passing is not proof that every claim, calculation association, or citation is correct."
+      }
+    }
+  ],
+  "grounded_checks": {
+    "run_1_revised_after_failure": true,
+    "run_1_passed": false,
+    "lesson_persisted": true,
+    "run_2_received_run_1_lesson": true,
+    "run_2_plan_received_lesson": true,
+    "run_2_drafting_policy_activated": true,
+    "run_2_passed": false,
+    "run_2_needed_no_revision": true,
+    "same_input_ablation_repaired_citations": true,
+    "same_input_ablation_repaired_benchmark": true
+  },
+  "independent_evidence_verification": {
+    "checks": {
+      "run_1_revised_after_failure": true,
+      "lesson_persisted": true,
+      "run_2_received_run_1_lesson": true,
+      "run_2_plan_received_lesson": true,
+      "run_2_drafting_policy_activated": true,
+      "same_input_ablation_repaired_citations": true,
+      "same_input_ablation_repaired_benchmark": true,
+      "run_1_final_evidence_verified": true,
+      "run_2_final_evidence_verified": true,
+      "same_input_draft_improved_under_memory_policy": true
+    },
+    "all_checks_passed": true,
+    "final_evidence_checks": [
+      {
+        "calculations": [
+          {
+            "metric": "revenue_growth",
+            "expected_percent": "20.0",
+            "displayed_percent": [
+              "20"
+            ],
+            "passed": true
+          },
+          {
+            "metric": "operating_margin",
+            "expected_percent": "10.0",
+            "displayed_percent": [
+              "10"
+            ],
+            "passed": true
+          },
+          {
+            "metric": "closing_price_change",
+            "expected_percent": "10.0",
+            "displayed_percent": [
+              "10"
+            ],
+            "passed": true
+          }
+        ],
+        "citation_check": {
+          "recognized_references": [
+            "evidence.earnings",
+            "evidence.market",
+            "evidence.news.items[0]"
+          ],
+          "unknown_references": [],
+          "issues": [],
+          "passed": true,
+          "scope": "Minimum citation presence and reference validity only."
+        },
+        "matches_cited_evidence_compiler": true,
+        "passed": true,
+        "scope": "Three named percentage metrics, valid supplied references and exact schema-bound report wording; not general financial truth or model acceptance."
+      },
+      {
+        "calculations": [
+          {
+            "metric": "revenue_growth",
+            "expected_percent": "20.0",
+            "displayed_percent": [
+              "20"
+            ],
+            "passed": true
+          },
+          {
+            "metric": "operating_margin",
+            "expected_percent": "10.0",
+            "displayed_percent": [
+              "10"
+            ],
+            "passed": true
+          },
+          {
+            "metric": "closing_price_change",
+            "expected_percent": "10.0",
+            "displayed_percent": [
+              "10"
+            ],
+            "passed": true
+          }
+        ],
+        "citation_check": {
+          "recognized_references": [
+            "evidence.earnings",
+            "evidence.market",
+            "evidence.news.items[0]"
+          ],
+          "unknown_references": [],
+          "issues": [],
+          "passed": true,
+          "scope": "Minimum citation presence and reference validity only."
+        },
+        "matches_cited_evidence_compiler": true,
+        "passed": true,
+        "scope": "Three named percentage metrics, valid supplied references and exact schema-bound report wording; not general financial truth or model acceptance."
+      }
+    ],
+    "same_input_before": {
+      "calculations": [
+        {
+          "metric": "revenue_growth",
+          "expected_percent": "20.0",
+          "displayed_percent": [
+            "-20"
+          ],
+          "passed": false
+        },
+        {
+          "metric": "operating_margin",
+          "expected_percent": "10.0",
+          "displayed_percent": [
+            "-20"
+          ],
+          "passed": false
+        },
+        {
+          "metric": "closing_price_change",
+          "expected_percent": "10.0",
+          "displayed_percent": [
+            "4"
+          ],
+          "passed": false
+        }
+      ],
+      "citation_check": {
+        "recognized_references": [],
+        "unknown_references": [],
+        "issues": [
+          "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+        ],
+        "passed": false,
+        "scope": "Minimum citation presence and reference validity only."
+      },
+      "matches_cited_evidence_compiler": false,
+      "passed": false,
+      "scope": "Three named percentage metrics, valid supplied references and exact schema-bound report wording; not general financial truth or model acceptance."
+    },
+    "same_input_after": {
+      "calculations": [
+        {
+          "metric": "revenue_growth",
+          "expected_percent": "20.0",
+          "displayed_percent": [
+            "20"
+          ],
+          "passed": true
+        },
+        {
+          "metric": "operating_margin",
+          "expected_percent": "10.0",
+          "displayed_percent": [
+            "10"
+          ],
+          "passed": true
+        },
+        {
+          "metric": "closing_price_change",
+          "expected_percent": "10.0",
+          "displayed_percent": [
+            "10"
+          ],
+          "passed": true
+        }
+      ],
+      "citation_check": {
+        "recognized_references": [
+          "evidence.earnings",
+          "evidence.market",
+          "evidence.news.items[0]"
+        ],
+        "unknown_references": [],
+        "issues": [],
+        "passed": true,
+        "scope": "Minimum citation presence and reference validity only."
+      },
+      "matches_cited_evidence_compiler": true,
+      "passed": true,
+      "scope": "Three named percentage metrics, valid supplied references and exact schema-bound report wording; not general financial truth or model acceptance."
+    },
+    "unchanged_model_acceptance": [
+      false,
+      false
+    ],
+    "model_acceptance_note": "The model acceptance flags and scores remain unchanged. Evidence verification is a separate, explicitly scoped measurement.",
+    "verifier_sha256": "27cd44201f72f79fc6f3a6fae77137694e65d3b8692de6c6498f3e467bd3b4ac"
+  },
+  "functional_checks": {
+    "Plans research": true,
+    "Uses selected tools": true,
+    "Self-reflects": true,
+    "Learns across runs": true,
+    "Prompt chaining": true,
+    "Routing": true,
+    "Evaluator-optimizer": true
+  },
+  "grounded_runtime": {
+    "started_at": "2026-10-19T23:39:39.788805+00:00",
+    "finished_at": "2026-10-19T23:40:16.177441+00:00",
+    "python": "3.12.14",
+    "torch": "2.6.0",
+    "transformers": "4.51.3",
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "device": "cpu",
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "base_commit": "34dbce9fb703707db813abb64ee85880319d7b30",
+    "input_sha256": "507afa69aea53623d36b7d8d7ea35d9fe3b3c52e1b2285ebc391001cefeec8d7",
+    "source_hashes": {
+      "src/grounded_reporting.py": "a0ec48a2f7db67bf7515d443f94b61c3296da686bb9b7bdc53ad3f3f6ae664d2",
+      "src/criterion_reviewer.py": "8df3807c437ccb32761e834dabeda1a9c88b4d13a9ab5ca74a4271f48d4d1edc",
+      "src/evaluation_memory.py": "7d56d3e7c25bebe071c49e0d327e4691358765f580ccfbfda9f2f8868446139f",
+      "src/llm.py": "cfcceaa74b668353935d76ff1ef018ad6dcadc34374d9f03eb32226c682c2bc2",
+      "src/planning.py": "cb51894fc2b7d0faed15f5a2e3e916442bf1711b6b54ae34713f340dac2a82ac"
+    }
+  },
+  "baseline_provenance": {
+    "source": "User-provided fresh Colab artifact ZIP",
+    "zip_sha256": "e051c0b9c4c9f85f8775ce4b24589b7c55fc85cbd4b699047748dba149f278e7",
+    "code_commit": "34dbce9fb703707db813abb64ee85880319d7b30",
+    "finished_at": "2026-10-19T22:53:44.264399+00:00",
+    "experiment_id": "686ea01d-2144-4ab8-9016-d719dce17b9d",
+    "execution_mode": "fresh_colab_models"
+  },
+  "report_mode": "completed_experiment_records_and_executable_verification"
+}
