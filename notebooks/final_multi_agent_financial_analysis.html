@@ -7817,10 +7817,9 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Multi-Agent-Financial-Analysis-System">Multi-Agent Financial Analysis System<a class="anchor-link" href="#Multi-Agent-Financial-Analysis-System">¶</a></h1><p><strong>AAI-520 Final Team Project</strong><br/>
 <strong>Tim Hays · Roopleen Kaur · Ashley Marx</strong><br/>
-<a href="https://github.com/tim17hays/NLP_AAI520">GitHub repository</a> · <a href="https://github.com/tim17hays/NLP_AAI520/tree/codex/final-team-integration">Final project branch</a></p>
-<p>This final report documents planning, specialist tool use, self-reflection and persistent memory, together with news chaining, routing and evaluator–optimizer workflows. It includes actual AAPL provider/model evidence, real Qwen baseline failures, an evidence-tool correction strategy, and an observed two-run memory-policy demonstration. Model acceptance and evidence verification are reported as separate outcomes.</p>
-<p><strong>How to read the results:</strong> The original free-form Qwen baseline failed acceptance in both runs. The completed hybrid demonstration uses Qwen to critique and score, Python to calculate and cite a bounded evidence brief, and a saved process lesson to activate the safer policy before the second draft. Model judgments, tool-generated text, scripted tests and recorded experiments are labeled separately. The results establish a software-policy benefit on fixed fictional evidence, not general financial accuracy, model fine-tuning or an investment recommendation.</p>
-<p><strong>Reproducibility:</strong> Run all reproduces this report and validates the supplied experiment records without downloading model weights. The model-execution commands and exact recorded runtime details appear below. Fresh provider/model experiments are optional reproductions, not prerequisites for reading this completed submission.</p>
+<a href="https://github.com/tim17hays/NLP_AAI520">GitHub repository</a> · <a href="https://github.com/tim17hays/NLP_AAI520/tree/codex/final-team-integration">Project source</a></p>
+<p>This project integrates research planning, specialist tools, financial news analysis, output evaluation and persistent memory into an investment-research workflow. The system retrieves source-attributed evidence, produces an analysis, evaluates its quality and retains reusable process lessons.</p>
+<p>The report presents an AAPL case study and controlled DEMO experiments. The controlled comparison examines how a stored lesson changes drafting behavior under identical inputs. Language-model judgments and arithmetic/citation verification are reported separately. The analyses are educational research examples, not investment recommendations.</p>
 </div>
 </div>
 </div>
@@ -7831,59 +7830,54 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1.-Design,-ownership-and-rubric-evidence">1. Design, ownership and rubric evidence<a class="anchor-link" href="#1.-Design,-ownership-and-rubric-evidence">¶</a></h2><table>
+<h2 id="1.-System-architecture-and-team-contributions">1. System architecture and team contributions<a class="anchor-link" href="#1.-System-architecture-and-team-contributions">¶</a></h2><table>
 <thead>
 <tr>
-<th>Requirement</th>
+<th>Capability</th>
 <th>Implementation</th>
-<th>Visible evidence</th>
+<th>Demonstration</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Plans research</td>
+<td>Research planning</td>
 <td><code>ResearchPlanner.plan()</code></td>
-<td>Section 4: selected specialists, ordered steps and lesson-review step</td>
+<td>Ordered research steps and specialist selection</td>
 </tr>
 <tr>
-<td>Uses tools dynamically</td>
-<td>Research-question routing selects tools</td>
-<td>Section 4: market/earnings/news/fallback routes; AAPL tool and error trace</td>
+<td>Tool use</td>
+<td>Question-dependent tool selection</td>
+<td>Market, earnings, news and company routes; AAPL evidence trace</td>
 </tr>
 <tr>
-<td>Self-reflects</td>
-<td>Real Qwen critique plus citation/content guards</td>
-<td>Sections 7–8: original judgments, failures, re-evaluation and acceptance</td>
+<td>Self-reflection</td>
+<td>Qwen review with citation and content checks</td>
+<td>Criterion scores, feedback and re-evaluation</td>
 </tr>
 <tr>
-<td>Learns across runs</td>
-<td>Saved process lesson activates a fixed safer policy</td>
-<td>Section 8: disk record, lesson identity, next plan and draft; same-input ablation</td>
+<td>Persistent memory</td>
+<td>Process lessons stored in JSON</td>
+<td>Disk persistence, retrieval before planning and memory-controlled drafting</td>
 </tr>
 <tr>
-<td>Prompt chaining</td>
+<td>News chaining</td>
 <td>Ingest → preprocess → classify → extract → summarize</td>
-<td>Section 3: trace, deduplication, actual FinBERT inference and source alignment</td>
+<td>Stage trace, deduplication, FinBERT inference and source alignment</td>
 </tr>
 <tr>
-<td>Routing</td>
+<td>Specialist routing</td>
 <td>Market, earnings, news and company specialists</td>
-<td>Section 4: different questions select different specialist tools</td>
+<td>Different research questions select different tools</td>
 </tr>
 <tr>
 <td>Evaluator–optimizer</td>
-<td>Critique → evidence-tool revision → re-evaluation</td>
-<td>Section 8: failed original, repaired brief and subsequent real model judgment</td>
-</tr>
-<tr>
-<td>Code and communication</td>
-<td>Reusable modules, tests, GitHub, comments, diagrams and disclosure</td>
-<td>Sections 1–10 and references</td>
+<td>Review → evidence-bound revision → re-evaluation</td>
+<td>Original and revised analyses with evidence verification</td>
 </tr>
 </tbody>
 </table>
-<p>Tim owns retrieval/news and integration; Roopleen owns planning/routing and initial draft generation; Ashley owns evaluation, revision and persistent memory. The final integration adds an explicitly labeled evidence-tool optimizer and keeps their component implementations and historical experiment records traceable in Git.</p>
-<p>The architecture combines LLM judgment with deterministic routing and arithmetic. Routing is a documented keyword heuristic. Memory changes an auditable drafting policy; it does not update model weights. The bounded numeric brief is applicable only when its required compatible inputs, units and periods are supplied.</p>
+<p>Tim contributed retrieval, news processing and integration; Roopleen contributed planning, specialist routing and initial draft generation; Ashley contributed evaluation, revision and persistent memory. Component implementations and experiment provenance are retained in the repository.</p>
+<p>The architecture combines LLM judgment with deterministic routing and arithmetic. Routing uses research-question keywords. Retrieved lessons activate an auditable drafting policy without changing model weights. The numeric report compiler requires compatible inputs, explicit units and reporting periods.</p>
 </div>
 </div>
 </div>
@@ -7923,9 +7917,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2.-Reproducible-runtime-and-repository">2. Reproducible runtime and repository<a class="anchor-link" href="#2.-Reproducible-runtime-and-repository">¶</a></h2><p>The original generation/review model is <code>Qwen/Qwen2.5-1.5B-Instruct</code>; the resource-bounded local reviewer is <code>Qwen/Qwen2.5-0.5B-Instruct</code>; news sentiment uses <code>ProsusAI/finbert</code>. Both run through Hugging Face Transformers without a paid LLM API key. Optional Finnhub/Alpha Vantage credentials remain outside the repository.</p>
-<p>The report displays the actual Colab baseline and local model-experiment metadata. Its default execution validates and presents those recorded results; this does not claim a new model call on every report execution. The source and experiment artifacts are included in the final branch. The loader supports CUDA, Apple MPS and CPU; CPU execution is slower.</p>
-<p>To repeat the experiments with model weights installed, run <code>python -m scripts.run_grounded_demo --output outputs/NEW_EXPERIMENT_DIRECTORY</code> and <code>python -m scripts.run_finbert_demo --model-path PATH_TO_FINBERT --output outputs/finbert_demo.json</code>. A new directory prevents memory contamination. <code>AAI520_DEVICE</code> selects a device; <code>AAI520_MODEL_PATH</code> can identify a local cached Qwen snapshot.</p>
+<h2 id="2.-Models-and-reproducibility">2. Models and reproducibility<a class="anchor-link" href="#2.-Models-and-reproducibility">¶</a></h2><p>The original generation/review model is <code>Qwen/Qwen2.5-1.5B-Instruct</code>. The CPU review experiment uses <code>Qwen/Qwen2.5-0.5B-Instruct</code>, and news sentiment uses <code>ProsusAI/finbert</code>. Models run through Hugging Face Transformers. Optional Finnhub and Alpha Vantage credentials are kept outside the repository.</p>
+<p>Recorded experiments include model identities, software versions, timestamps, source fingerprints and raw judgments. Report execution validates and presents those records; it is distinct from performing new inference. The loader supports CUDA, Apple MPS and CPU.</p>
+<p>Experiment entry points are <code>scripts/run_grounded_demo.py</code> and <code>scripts/run_finbert_demo.py</code>. Each research experiment uses a separate directory to isolate memory. <code>AAI520_DEVICE</code>, <code>AAI520_MODEL_NAME</code> and <code>AAI520_MODEL_PATH</code> identify the selected device and model snapshot.</p>
 </div>
 </div>
 </div>
@@ -8054,9 +8048,9 @@ Revision limit: 2
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="3.-News-prompt-chain-and-source-validation-%E2%80%94-Tim">3. News prompt chain and source validation — Tim<a class="anchor-link" href="#3.-News-prompt-chain-and-source-validation-%E2%80%94-Tim">¶</a></h2><p>The production chain ingests news, normalizes text and URLs, deduplicates records, classifies retained text with FinBERT, extracts source sentences and produces a source-preserving summary. Every stage leaves a visible trace.</p>
-<p>The first checks use a deterministic injected classifier to isolate provenance and error behavior. The subsequent experiment uses actual FinBERT inference on explicitly fictional classroom news; its input is duplicated to test preprocessing. Neither classification confidence nor a source quotation establishes the truth of an article or predicts a stock return.</p>
-<p>Yahoo news requests have a 20-second per-request timeout and a 15-minute successful-result cache. The fallback order is Yahoo → Finnhub → Alpha Vantage. Historical-price requests use a 15-second timeout. These are per-request bounds, not an overall workflow deadline.</p>
+<h2 id="3.-News-processing-and-source-validation">3. News processing and source validation<a class="anchor-link" href="#3.-News-processing-and-source-validation">¶</a></h2><p>The news chain ingests records, normalizes text and URLs, removes duplicates, classifies retained text with FinBERT, extracts source sentences and produces a source-preserving summary. Each stage records its inputs or outputs.</p>
+<p>Deterministic classifier fixtures isolate provenance and error-handling behavior. The FinBERT experiment separately demonstrates actual model inference on explicitly fictional classroom news. Classification confidence describes the model's sentiment judgment, not the truth of a report or the probability of a stock-price movement.</p>
+<p>Yahoo news requests use a 20-second timeout and a 15-minute successful-result cache. The fallback sequence is Yahoo → Finnhub → Alpha Vantage. Historical-price requests use a 15-second timeout.</p>
 </div>
 </div>
 </div>
@@ -8224,7 +8218,7 @@ Processed 1 source-attributed news items (1 neutral). Representative headlines: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The checks link extracted sentences to the retained source text, confirm deduplication, and preserve missing-data/classifier failures. They verify provenance and error behavior, not truth of the article or investment value. Financial snapshots do not establish a reporting period unless the provider explicitly supplies one.</p>
+<p>These checks verify deduplication, alignment between extracted sentences and retained source text, and handling of unavailable provider or classifier responses. Provider access times are distinguished from financial reporting periods.</p>
 </div>
 </div>
 </div>
@@ -8235,7 +8229,7 @@ Processed 1 source-attributed news items (1 neutral). Representative headlines: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Actual-FinBERT-chaining-experiment">Actual FinBERT chaining experiment<a class="anchor-link" href="#Actual-FinBERT-chaining-experiment">¶</a></h3><p>The artifact below was produced by running the real <code>ProsusAI/finbert</code> model through the production <code>NewsPipeline</code> on duplicated fictional source text. It shows the complete five-stage trace, removes the duplicate and retains the source alignment. This is an execution example, not a measured sentiment-accuracy benchmark.</p>
+<h3 id="FinBERT-experiment">FinBERT experiment<a class="anchor-link" href="#FinBERT-experiment">¶</a></h3><p>The production <code>NewsPipeline</code> processes duplicated fictional news with the actual <code>ProsusAI/finbert</code> model. The displayed trace records all five stages, duplicate removal and source alignment. This experiment demonstrates execution and provenance rather than sentiment-accuracy benchmarking.</p>
 </div>
 </div>
 </div>
@@ -8340,7 +8334,7 @@ PASS: actual FinBERT inference, deduplication and all five workflow stages.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="4.-Planning,-specialist-routing-and-draft-generation-%E2%80%94-Roopleen">4. Planning, specialist routing and draft generation — Roopleen<a class="anchor-link" href="#4.-Planning,-specialist-routing-and-draft-generation-%E2%80%94-Roopleen">¶</a></h2><p>The planner selects specialists using research-question keywords, calls the corresponding tools, and returns evidence, a structured plan, tool/error trace, retrieved lessons and a draft. Unsupported or unclear wording falls back to a company-profile route; this is a documented heuristic rather than evidence of semantic understanding.</p>
+<h2 id="4.-Planning,-routing-and-draft-generation">4. Planning, routing and draft generation<a class="anchor-link" href="#4.-Planning,-routing-and-draft-generation">¶</a></h2><p>The planner selects specialists from research-question keywords and returns evidence, an ordered plan, a tool trace, retrieved lessons and a draft. Questions without a matching specialist use the company-profile route. The examples below illustrate specialist selection and incorporation of a process lesson into planning.</p>
 </div>
 </div>
 </div>
@@ -8451,7 +8445,7 @@ Planner execution code:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="AAPL-provider-evidence-and-Qwen-draft">AAPL provider evidence and Qwen draft<a class="anchor-link" href="#AAPL-provider-evidence-and-Qwen-draft">¶</a></h3><p>This section preserves the AAPL provider/model result from the completed Colab execution associated with commit <code>34dbce9</code>. Its source URLs, access times, missing values and errors remain visible. It demonstrates real provider integration separately from the fixed fictional benchmark used to test correction and memory.</p>
+<h3 id="AAPL-case-study">AAPL case study<a class="anchor-link" href="#AAPL-case-study">¶</a></h3><p>The AAPL case study uses the recorded Colab execution associated with commit <code>34dbce9</code>. Source URLs, access times, missing fields and provider diagnostics accompany the retrieved market, financial and news evidence. The fixed DEMO benchmark is examined separately to control the inputs used in the memory comparison.</p>
 </div>
 </div>
 </div>
@@ -8648,7 +8642,7 @@ News Summary:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Source-attributed retrieval does not guarantee a grounded generated narrative. The AAPL draft is retained as model output and must be interpreted against the displayed source records. The controlled correction experiment below evaluates specific known errors without pretending that a model score independently verifies real-world financial claims.</p>
+<p>The generated AAPL narrative is presented alongside its source records. Retrieval provenance and generated interpretation are distinct: the source trace supports inspection of individual claims, while the controlled benchmark provides explicit expected calculations for evaluation.</p>
 </div>
 </div>
 </div>
@@ -8659,9 +8653,9 @@ News Summary:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="5.-Evaluation,-revision-and-persistent-memory-%E2%80%94-Ashley">5. Evaluation, revision and persistent memory — Ashley<a class="anchor-link" href="#5.-Evaluation,-revision-and-persistent-memory-%E2%80%94-Ashley">¶</a></h2><p>The evaluator scores evidence support, completeness, consistency, uncertainty and clarity from 0–2. Passing requires at least 8/10, no zero criterion, full evidence support and consistency, and no critical issues. Citation checks reject missing/unknown references. Narrow benchmark checks validate selected computed facts; they are not general factual verification.</p>
-<p>The loop stops on acceptance, at two revisions, or when a revised draft is unchanged. It never converts a failure into a pass for presentation. Process lessons can be saved after a verified failure without endorsing the failed financial claims. Duplicate lessons reuse an existing record; <code>saved_lesson</code> being non-null does not mean a second unique lesson was created.</p>
-<p>The shared transport permits one additional model attempt when JSON/schema validation fails. The retry receives the original evidence plus the exact validation error and raw invalid response. Both attempts remain logged. Missing criteria are never supplied by Python, and two invalid attempts still stop the run. This format retry does not change scoring or count as an analysis revision.</p>
+<h2 id="5.-Evaluation,-revision-and-persistent-memory">5. Evaluation, revision and persistent memory<a class="anchor-link" href="#5.-Evaluation,-revision-and-persistent-memory">¶</a></h2><p>The evaluator assigns 0–2 points for evidence support, completeness, consistency, uncertainty and clarity. Acceptance requires at least 8/10, no zero-valued criterion, full evidence support and consistency, and no critical issues. Citation checks validate supplied references; benchmark checks examine selected computed facts.</p>
+<p>Revision stops on acceptance, at the two-revision limit or when a proposed draft is unchanged. Memory retains reusable process lessons rather than current prices or predictions. Duplicate lessons reuse the existing record.</p>
+<p>The model transport permits one additional attempt for an invalid JSON/schema response. Original responses and validation diagnostics are retained. Formatting retries are distinct from analysis revisions.</p>
 </div>
 </div>
 </div>
@@ -8915,8 +8909,8 @@ Process-lesson policy:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Controlled-benchmark-and-offline-checks">Controlled benchmark and offline checks<a class="anchor-link" href="#Controlled-benchmark-and-offline-checks">¶</a></h3><p>The DEMO company, figures, dates, news and <code>example.com</code> URLs are fictional classroom evidence. Expected calculations are 20% revenue growth, 10% operating margin and 10% closing-price change. No prior operating-income value, guaranteed return or price target is supplied.</p>
-<p>The acceptance checks below use scripted fixtures; this verifies code/data flow and stopping rules, not real model performance. The following section separately uses real Qwen responses.</p>
+<h3 id="Controlled-inputs-and-software-validation">Controlled inputs and software validation<a class="anchor-link" href="#Controlled-inputs-and-software-validation">¶</a></h3><p>DEMO is a fictional classroom company. Its figures, dates, news and <code>example.com</code> URLs are synthetic. The supplied inputs imply 20% revenue growth, 10% operating margin and 10% closing-price change. No prior operating-income comparison, guaranteed return or price target is supplied.</p>
+<p>Scripted tests validate interfaces, arithmetic safeguards, citation handling, memory persistence and stopping rules. Real-model experiment records are presented separately.</p>
 </div>
 </div>
 </div>
@@ -8939,7 +8933,7 @@ Process-lesson policy:
 <span class="nb">print</span><span class="p">(</span><span class="n">checks</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">checks</span><span class="o">.</span><span class="n">returncode</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">checks</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Offline checks failed; resolve before submission."</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Offline validation returned a nonzero exit status."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -9044,8 +9038,8 @@ Derived benchmark calculations: [{'metric': 'revenue_change_pct', 'value': 20.0,
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="6.-Original-real-model-baseline">6. Original real-model baseline<a class="anchor-link" href="#6.-Original-real-model-baseline">¶</a></h2><p>The original Colab experiment used fixed fictional DEMO evidence. Run 1 began with an uncited benchmark draft; Run 2 used Qwen generation after receiving a saved lesson. Both evaluation/revision histories are retained, including failed outcomes.</p>
-<p>The different starting draft origins prevent a causal comparison of memory from these two baseline scores. Section 8 therefore holds the raw candidate and evidence fixed when testing the new memory-controlled drafting policy. The baseline remains a record of free-form model behavior, not evidence of successful correction.</p>
+<h2 id="6.-Baseline-experiment">6. Baseline experiment<a class="anchor-link" href="#6.-Baseline-experiment">¶</a></h2><p>The Colab baseline uses fixed fictional DEMO evidence. Run 1 begins with an uncited benchmark draft, and Run 2 uses Qwen generation with a retrieved process lesson. Evaluation histories, model scores and reference checks are retained.</p>
+<p>Because the initial drafts have different origins, baseline score differences do not isolate a memory effect. Section 8 instead compares the same raw candidate and evidence with and without the stored drafting policy.</p>
 </div>
 </div>
 </div>
@@ -9537,7 +9531,7 @@ Run Section 14 to display the observed results and update the ZIP.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="7.-Observed-results,-memory-delivery-and-manual-review">7. Observed results, memory delivery and manual review<a class="anchor-link" href="#7.-Observed-results,-memory-delivery-and-manual-review">¶</a></h2><p>The view below uses fresh results after a Colab run, or the recorded stdout from Ashley's authored demonstration in local audit mode. Each source is labeled. Values in the historical description remain labeled as historical rather than being rewritten to predict a future execution.</p>
+<h2 id="7.-Baseline-results">7. Baseline results<a class="anchor-link" href="#7.-Baseline-results">¶</a></h2><p>The results below identify the experiment source and show initial and final scores, revisions, acceptance decisions and lessons received. Drafts and evaluation histories provide the supporting detail for the comparison.</p>
 </div>
 </div>
 </div>
@@ -9919,9 +9913,9 @@ A returned saved lesson may be an existing deduplicated record.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Baseline-findings-and-design-response">Baseline findings and design response<a class="anchor-link" href="#Baseline-findings-and-design-response">¶</a></h3><p>In the completed October 19 Colab baseline, Run 1 stayed at <strong>7/10</strong> after two revisions. Run 2 stayed at <strong>6/10</strong> and stopped when its proposed revision was unchanged. Neither final analysis passed, although all workflow and lesson-delivery checks passed.</p>
-<p>Run 1 omitted citations and incorrectly described an unadjusted price change as total return. Run 2 invented revenue of $80 million instead of the supplied $120 million, reported −20% revenue growth instead of +20%, and treated a $4 closing-price increase as 4%. The correct supplied calculations are <strong>20% revenue growth, 10% operating margin and 10% price change</strong>. The saved lesson reached the generator but did not reliably control its wording.</p>
-<p>The design response is an evidence-bound optimizer, not a weaker passing threshold. It computes the supported metrics and retains cited source text, then submits its candidate to the existing evaluation contract and deterministic guards. The bounded CPU reviewer uses separately prompted ordinal judgments to avoid JSON serialization failures; each score is selected by the model and logged. The model still rejects the corrected brief, so independent evidence verification is reported separately rather than changing its acceptance flags. A retrieved process lesson activates that same fixed drafting policy before a later run. This is explicitly tool-assisted generation, not a repaired answer relabeled as an original LLM response.</p>
+<h3 id="Interpretation-of-the-baseline">Interpretation of the baseline<a class="anchor-link" href="#Interpretation-of-the-baseline">¶</a></h3><p>Run 1 received 7/10 before and after two revisions. Run 2 received 6/10 and terminated when its proposed revision was unchanged. Both remained below the configured acceptance conditions, while lesson persistence and delivery checks were satisfied.</p>
+<p>The baseline illustrates two distinct evaluation concerns: references can be omitted even when calculations are correct, and a retrieved lesson does not by itself ensure consistent numerical statements. The supplied inputs establish <strong>20% revenue growth, 10% operating margin and 10% closing-price change</strong>.</p>
+<p>The evidence-bound policy addresses these concerns by calculating metrics from supplied inputs and placing valid references alongside claims. Model acceptance and independent evidence verification remain separate measurements throughout the subsequent experiment.</p>
 </div>
 </div>
 </div>
@@ -10021,9 +10015,10 @@ These narrow rule checks do not replace a claim-by-claim manual review.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="8.-Evidence-tool-optimization-and-learning-across-runs">8. Evidence-tool optimization and learning across runs<a class="anchor-link" href="#8.-Evidence-tool-optimization-and-learning-across-runs">¶</a></h2><p>This completed experiment keeps one previously generated Qwen candidate and its fictional evidence fixed. The actual <code>ResearchPlanner</code> selects and executes dataset-backed market, earnings and news specialists. The existing evaluator/memory loop receives real Qwen ordinal judgments; an explicit deterministic evidence tool handles correction instead of asking the same small model to rewrite unsupported numbers again.</p>
-<p><strong>Run 1:</strong> evaluate the original candidate, compile a cited brief after failure, re-evaluate that new candidate, independently verify its evidence-bound calculations and citations, and save the observed process lesson to disk. <strong>Run 2:</strong> retrieve that record before planning and drafting; the lesson activates the same evidence-bound policy before evaluation. The model still assigns the scores and the existing acceptance thresholds remain unchanged. The local CPU reviewer is Qwen2.5-0.5B-Instruct; original Colab baseline scores used Qwen2.5-1.5B-Instruct, so those two experiments are not a controlled model-to-model score comparison. The same-input policy ablation is deterministic and does not depend on changing reviewers.</p>
-<p>The report compiler reads evidence fields, units, periods and formulas. It does not read a gold/reference answer or insert DEMO-specific percentages. Tests change the inputs and verify changed results. Missing inputs or unresolved snapshot errors cause a clear failure instead of invented facts.</p>
+<h2 id="8.-Evidence-bound-optimization-and-memory-comparison">8. Evidence-bound optimization and memory comparison<a class="anchor-link" href="#8.-Evidence-bound-optimization-and-memory-comparison">¶</a></h2><p>This experiment holds a previously generated Qwen candidate and its fictional evidence fixed. <code>ResearchPlanner</code> selects dataset-backed market, earnings and news tools. The evaluation loop receives real model judgments, and a deterministic evidence tool constructs a cited analytical brief.</p>
+<p>In Run 1, evaluation identifies issues in the original candidate, the optimizer constructs a brief, and the new candidate is re-evaluated and checked against the supplied evidence. A process lesson is stored on disk. In Run 2, that record is retrieved before planning and drafting and activates the evidence-bound policy before evaluation.</p>
+<p>The CPU reviewer assigns each criterion separately using Qwen2.5-0.5B-Instruct. The original Colab baseline used Qwen2.5-1.5B-Instruct, so their scores are not treated as a controlled comparison between models. The same-input policy comparison measures the effect of the stored drafting policy independently of the reviewer change.</p>
+<p>The compiler reads evidence fields, units, periods and formulas rather than a reference answer. Changed-input tests check that calculations follow the data. Incomplete inputs and unresolved snapshot errors are rejected.</p>
 </div>
 </div>
 </div>
@@ -11102,7 +11097,7 @@ Raw model responses: [
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Run 2 received lesson identity:"</span><span class="p">,</span> <span class="n">grounded</span><span class="p">[</span><span class="s2">"results"</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s2">"lessons_used"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"lesson_id"</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Same-input comparison:"</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">grounded</span><span class="p">[</span><span class="s2">"same_input_ablation"</span><span class="p">],</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">first</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="n">grounded</span><span class="p">[</span><span class="s2">"results"</span><span class="p">]</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**Observed interpretation:** Run 1 changed from </span><span class="si">{</span><span class="n">first</span><span class="p">[</span><span class="s1">'initial_score'</span><span class="p">]</span><span class="si">}</span><span class="s2">/10 to </span><span class="si">{</span><span class="n">first</span><span class="p">[</span><span class="s1">'revised_score'</span><span class="p">]</span><span class="si">}</span><span class="s2">/10 after </span><span class="si">{</span><span class="n">first</span><span class="p">[</span><span class="s1">'revisions_completed'</span><span class="p">]</span><span class="si">}</span><span class="s2"> tool revision(s); Run 2 began at </span><span class="si">{</span><span class="n">second</span><span class="p">[</span><span class="s1">'initial_score'</span><span class="p">]</span><span class="si">}</span><span class="s2">/10 and completed </span><span class="si">{</span><span class="n">second</span><span class="p">[</span><span class="s1">'revisions_completed'</span><span class="p">]</span><span class="si">}</span><span class="s2"> changed revisions and </span><span class="si">{</span><span class="n">second</span><span class="p">[</span><span class="s1">'revision_calls'</span><span class="p">]</span><span class="si">}</span><span class="s2"> optimizer attempt(s). The exact same raw candidate and evidence produce failed citation/benchmark checks without the stored lesson and passing checks under the fixed evidence policy. This demonstrates retained-state use and a bounded policy benefit, not improved model weights or general financial accuracy."</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**Observed interpretation:** Run 1 changed from </span><span class="si">{</span><span class="n">first</span><span class="p">[</span><span class="s1">'initial_score'</span><span class="p">]</span><span class="si">}</span><span class="s2">/10 to </span><span class="si">{</span><span class="n">first</span><span class="p">[</span><span class="s1">'revised_score'</span><span class="p">]</span><span class="si">}</span><span class="s2">/10 after </span><span class="si">{</span><span class="n">first</span><span class="p">[</span><span class="s1">'revisions_completed'</span><span class="p">]</span><span class="si">}</span><span class="s2"> tool revision(s); Run 2 began at </span><span class="si">{</span><span class="n">second</span><span class="p">[</span><span class="s1">'initial_score'</span><span class="p">]</span><span class="si">}</span><span class="s2">/10 and completed </span><span class="si">{</span><span class="n">second</span><span class="p">[</span><span class="s1">'revisions_completed'</span><span class="p">]</span><span class="si">}</span><span class="s2"> changed revisions and </span><span class="si">{</span><span class="n">second</span><span class="p">[</span><span class="s1">'revision_calls'</span><span class="p">]</span><span class="si">}</span><span class="s2"> optimizer attempt(s). The exact same raw candidate and evidence show improved citation and benchmark-check outcomes under the memory-activated evidence policy. This demonstrates retained-state use and a bounded policy benefit, not improved model weights or general financial accuracy."</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -11189,7 +11184,7 @@ Same-input comparison: {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<p><strong>Observed interpretation:</strong> Run 1 changed from 3/10 to 4/10 after 1 tool revision(s); Run 2 began at 4/10 and completed 0 changed revisions and 1 optimizer attempt(s). The exact same raw candidate and evidence produce failed citation/benchmark checks without the stored lesson and passing checks under the fixed evidence policy. This demonstrates retained-state use and a bounded policy benefit, not improved model weights or general financial accuracy.</p>
+<p><strong>Observed interpretation:</strong> Run 1 changed from 3/10 to 4/10 after 1 tool revision(s); Run 2 began at 4/10 and completed 0 changed revisions and 1 optimizer attempt(s). The exact same raw candidate and evidence show improved citation and benchmark-check outcomes under the memory-activated evidence policy. This demonstrates retained-state use and a bounded policy benefit, not improved model weights or general financial accuracy.</p>
 </div>
 </div>
 </div>
@@ -11258,8 +11253,9 @@ Same-input comparison: {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="What-the-evidence-policy-demonstration-establishes">What the evidence-policy demonstration establishes<a class="anchor-link" href="#What-the-evidence-policy-demonstration-establishes">¶</a></h3><p>The model-based reviewer, independent citation/content guards, computed evidence ledger, saved lesson and next-run policy decision are visible separately. The CPU reviewer rated even the corrected brief poorly; both legacy model-acceptance flags remain false. The positive result is independently verified correction of the supplied metrics and citations, followed by prevention of the same raw-draft errors under the saved policy. No model score or acceptance rule was changed to manufacture a pass. The corrected brief includes 20% revenue growth, 10% operating margin and 10% closing-price change with compatible periods and citations. News is quoted as supplied rather than promoted to a verified real-world event. Price change is explicitly distinguished from total return.</p>
-<p>The evidence-tool optimizer is intentionally conservative and schema-bound. It rejects incomplete inputs instead of guessing reporting periods or financial units. A correct result on the fictional benchmark does not establish broad factual verification, predictive investment value or robustness to every real provider schema. The original AAPL example and failed Qwen baseline show why these limits matter.</p>
+<h3 id="Interpretation-and-scope">Interpretation and scope<a class="anchor-link" href="#Interpretation-and-scope">¶</a></h3><p>Both evidence-bound briefs contain the supplied metrics with compatible periods and valid references. Independent checks confirm 20% revenue growth, 10% operating margin and 10% closing-price change. News is attributed to its supplied source, and price change is distinguished from total return.</p>
+<p>The same-input comparison shows that the stored lesson activates a policy that addresses the measured citation and calculation issues before the second draft is evaluated. Model acceptance decisions remain as recorded and are distinct from these evidence checks.</p>
+<p>The compiler supports a defined numeric-snapshot schema. These findings describe the controlled example and do not establish general financial accuracy, predictive investment value or changes to model weights.</p>
 </div>
 </div>
 </div>
@@ -11282,8 +11278,7 @@ Same-input comparison: {
 <span class="p">}</span>
 <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">functional_checks</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">functional_checks</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">functional_checks</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"All seven agent-function/workflow requirements have visible executable evidence."</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"This checklist validates demonstrated behavior; it does not predict the instructor's grade."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"All seven system capability checks returned true."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -11305,8 +11300,7 @@ Same-input comparison: {
   "Routing": true,
   "Evaluator-optimizer": true
 }
-All seven agent-function/workflow requirements have visible executable evidence.
-This checklist validates demonstrated behavior; it does not predict the instructor's grade.
+All seven system capability checks returned true.
 </pre>
 </div>
 </div>
@@ -11319,9 +11313,9 @@ This checklist validates demonstrated behavior; it does not predict the instruct
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="9.-Conclusions-and-submission-record">9. Conclusions and submission record<a class="anchor-link" href="#9.-Conclusions-and-submission-record">¶</a></h2><p>The final project documents all four agent functions and all three workflow patterns through the source, traces, experiments and checks displayed above. The functional checklist reports what executed rather than predicting a rubric score.</p>
-<p>The original Qwen failures remain visible. The evidence-tool experiment tests a specific architectural remedy: real model critique, a cited arithmetic brief, re-evaluation, and memory-controlled preflight drafting. The same-input comparison isolates the software-policy effect on this fixed case. It does not establish general financial reliability or a causal improvement in the underlying language model.</p>
-<p>The final submission is this executed notebook rendered as HTML, with the GitHub branch, source records, exact runtime metadata, references and AI disclosure. The accompanying reproducibility ZIP preserves the notebook and supporting artifacts. Canvas upload is performed by the team representative; individual peer evaluations use the separate assignment link.</p>
+<h2 id="9.-Conclusions">9. Conclusions<a class="anchor-link" href="#9.-Conclusions">¶</a></h2><p>The system integrates research planning, specialist tool use, self-reflection and persistent memory with news chaining, routing and evaluator–optimizer workflows. Source traces connect retrieved records to analysis, while evaluation histories document review and revision behavior.</p>
+<p>The controlled comparison demonstrates a concrete use of retained state: a stored process lesson changes drafting policy before the subsequent analysis. Under identical inputs, the evidence-bound policy improves the measured calculation and citation checks. Recorded model judgments remain a separate quality signal.</p>
+<p>The AAPL case study demonstrates provider integration, and the fictional benchmark isolates arithmetic and memory behavior. Together, the experiments illustrate how retrieval, model review, deterministic verification and persistent notes can be combined in an auditable research system.</p>
 </div>
 </div>
 </div>
@@ -11332,14 +11326,15 @@ This checklist validates demonstrated behavior; it does not predict the instruct
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="References-and-evidence-provenance">References and evidence provenance<a class="anchor-link" href="#References-and-evidence-provenance">¶</a></h2><ul>
-<li>Qwen Team. (2024). <em>Qwen2.5-1.5B-Instruct</em> [Model card]. <a href="https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct">Hugging Face</a>. The repository's model card documents direct Transformers generation and the model context limit.</li>
-<li>ProsusAI. (n.d.). <em>FinBERT</em> [Model card]. <a href="https://huggingface.co/ProsusAI/finbert">Hugging Face</a>. Used for financial-text sentiment, not stock-return prediction.</li>
-<li>Aroussi, R. (n.d.). <em>yfinance documentation</em>. <a href="https://ranaroussi.github.io/yfinance/">Documentation</a>. Used for educational market/financial retrieval.</li>
-<li>Hays, T., Kaur, R., &amp; Marx, A. (2026). <em>NLP_AAI520: Multi-Agent Financial Analysis System</em> [Source code and executed component notebooks]. <a href="https://github.com/tim17hays/NLP_AAI520">GitHub</a>.</li>
-<li>Course assignment. <em>AAI-520 Final Team Project Requirements</em>. Supplied project specification preserved in <code>docs/requirements/AAI-520_Final_Project_Requirements.pdf</code>.</li>
+<h2 id="References-and-provenance">References and provenance<a class="anchor-link" href="#References-and-provenance">¶</a></h2><ul>
+<li>Qwen Team. (2024). <em>Qwen2.5-1.5B-Instruct</em> [Model card]. <a href="https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct">Hugging Face</a>.</li>
+<li>Qwen Team. (2024). <em>Qwen2.5-0.5B-Instruct</em> [Model card]. <a href="https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct">Hugging Face</a>.</li>
+<li>ProsusAI. (n.d.). <em>FinBERT</em> [Model card]. <a href="https://huggingface.co/ProsusAI/finbert">Hugging Face</a>.</li>
+<li>Aroussi, R. (n.d.). <em>yfinance documentation</em>. <a href="https://ranaroussi.github.io/yfinance/">Documentation</a>.</li>
+<li>Hays, T., Kaur, R., &amp; Marx, A. (2026). <em>NLP_AAI520: Multi-Agent Financial Analysis System</em> [Source code and experiment records]. <a href="https://github.com/tim17hays/NLP_AAI520">GitHub</a>.</li>
+<li>Course assignment. <em>AAI-520 Final Team Project Requirements</em>. Supplied specification preserved in <code>docs/requirements/AAI-520_Final_Project_Requirements.pdf</code>.</li>
 </ul>
-<p>The AAPL snapshot retains its original source URLs and access times. Controlled DEMO evidence is explicitly fictional. Historical controlled model results were extracted from Ashley's saved notebook stdout; no replacement scores or model responses were created during assembly.</p>
+<p>AAPL records retain their source URLs and access times. DEMO inputs are explicitly fictional. The Colab baseline and CPU review records identify their actual runtimes, model identities and judgments.</p>
 </div>
 </div>
 </div>
@@ -11352,7 +11347,7 @@ This checklist validates demonstrated behavior; it does not predict the instruct
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="10.-AI-assistance-disclosure-and-responsibility">10. AI assistance disclosure and responsibility<a class="anchor-link" href="#10.-AI-assistance-disclosure-and-responsibility">¶</a></h2><p>OpenAI Codex assisted with code development and debugging, retrieval reliability, repository integration, evaluation and revision interfaces, model-response formatting, evidence-bound reporting, memory-policy demonstrations, regression tests, notebook assembly, narrative editing and export validation. The report documents the resulting implementation, tests and limitations and distinguishes AI-generated material from independently verified evidence.</p>
 <p>The team's primary contributions remain attributed throughout the notebook and Git history. Ashley's component notebook includes her own AI-use disclosure. Recorded model runs retain their actual runtime and provenance. Tool-generated briefs, model judgments, source quotations and scripted test fixtures are labeled separately.</p>
-<p>The evidence brief uses deterministic arithmetic and source-bound wording to address observed model failures; it is not presented as an LLM-generated improvement. Team members remain responsible for understanding, validating, explaining and submitting the work.</p>
+<p>The evidence brief uses deterministic arithmetic and source-bound wording to maintain arithmetic consistency and source attribution; it is not presented as an LLM-generated improvement. Team members remain responsible for understanding, validating, explaining and submitting the work.</p>
 </div>
 </div>
 </div>
@@ -11410,7 +11405,7 @@ This checklist validates demonstrated behavior; it does not predict the instruct
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Download bundle:"</span><span class="p">,</span> <span class="n">archive</span><span class="p">)</span>
     <span class="n">files</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">archive</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Final report verification complete. Model experiment provenance is recorded above; Canvas submission is a separate action."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Report verification complete."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
