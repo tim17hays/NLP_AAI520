@@ -9,6 +9,7 @@ from .data_tools import StockResearchTools
 from .news_pipeline import NewsPipeline
 from .llm import generate_draft
 
+
 @dataclass(frozen=True)
 class ResearchPlan:
     """A structured plan describing which specialists should be used."""
@@ -19,6 +20,7 @@ class ResearchPlan:
     steps: list[str]
     retrieved_lessons: list = field(default_factory=list)
 
+
 class ResearchPlanner:
     """Create a research plan by routing a question to specialists."""
 
@@ -26,9 +28,11 @@ class ResearchPlanner:
         self,
         research_tools: StockResearchTools | None = None,
         news_pipeline: NewsPipeline | None = None,
+        draft_function=None,
     ) -> None:
         self._research_tools = research_tools or StockResearchTools()
         self._news_pipeline = news_pipeline or NewsPipeline()
+        self._draft_function = draft_function
 
         self._routing_keywords = {
             "market": (
@@ -88,8 +92,10 @@ class ResearchPlanner:
                 selected.append(specialist)
 
         return selected
-    
-    def plan(self, ticker: str, research_question: str, lessons: list | None = None) -> ResearchPlan:
+
+    def plan(
+        self, ticker: str, research_question: str, lessons: list | None = None
+    ) -> ResearchPlan:
         """Create a research plan for the given stock and question."""
         symbol = self.normalize_ticker(ticker)
         specialists = self.route(research_question)
@@ -103,11 +109,16 @@ class ResearchPlanner:
         ]
 
         if lessons:
-            steps.insert(0, "Review retrieved lessons before collecting and drafting evidence: "
-                         + str(lessons))
+            steps.insert(
+                0,
+                "Review retrieved lessons before collecting and drafting evidence: "
+                + str(lessons),
+            )
 
         steps.append("Combine the retrieved evidence into a draft analysis.")
-        steps.append("Send the draft analysis and supporting evidence for evaluation.")
+        steps.append(
+            "Send the draft analysis and supporting evidence for evaluation."
+        )
 
         return ResearchPlan(
             ticker=symbol,
@@ -116,8 +127,10 @@ class ResearchPlanner:
             steps=steps,
             retrieved_lessons=list(lessons or []),
         )
-    
-    def execute(self, ticker: str, research_question: str, lessons: list | None = None) -> dict[str, Any]:
+
+    def execute(
+        self, ticker: str, research_question: str, lessons: list | None = None
+    ) -> dict[str, Any]:
         """Execute the specialists selected for the research question."""
         symbol = self.normalize_ticker(ticker)
         specialists = self.route(research_question)
@@ -145,7 +158,8 @@ class ResearchPlanner:
                 result = self._news_pipeline.process(symbol)
                 evidence["news"] = result
 
-        draft_analysis = generate_draft(
+        draft_function = self._draft_function or generate_draft
+        draft_analysis = draft_function(
             ticker=symbol,
             research_question=research_question.strip(),
             evidence=evidence,
@@ -161,8 +175,11 @@ class ResearchPlanner:
             "plan": asdict(plan),
             "retrieved_lessons": plan.retrieved_lessons,
             "tool_trace": [
-                {"specialist": name, "tool": payload.get("tool", "news_pipeline"),
-                 "errors": payload.get("errors", [])}
+                {
+                    "specialist": name,
+                    "tool": payload.get("tool", "news_pipeline"),
+                    "errors": payload.get("errors", []),
+                }
                 for name, payload in evidence.items()
             ],
         }

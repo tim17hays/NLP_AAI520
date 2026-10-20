@@ -1,0 +1,189 @@
+{
+  "checks": {
+    "run_1_revised_after_failure": true,
+    "lesson_persisted": true,
+    "run_2_received_run_1_lesson": true,
+    "run_2_plan_received_lesson": true,
+    "run_2_drafting_policy_activated": true,
+    "same_input_ablation_repaired_citations": true,
+    "same_input_ablation_repaired_benchmark": true,
+    "run_1_final_evidence_verified": true,
+    "run_2_final_evidence_verified": true,
+    "same_input_draft_improved_under_memory_policy": true
+  },
+  "all_checks_passed": true,
+  "final_evidence_checks": [
+    {
+      "calculations": [
+        {
+          "metric": "revenue_growth",
+          "expected_percent": "20.0",
+          "displayed_percent": [
+            "20"
+          ],
+          "passed": true
+        },
+        {
+          "metric": "operating_margin",
+          "expected_percent": "10.0",
+          "displayed_percent": [
+            "10"
+          ],
+          "passed": true
+        },
+        {
+          "metric": "closing_price_change",
+          "expected_percent": "10.0",
+          "displayed_percent": [
+            "10"
+          ],
+          "passed": true
+        }
+      ],
+      "citation_check": {
+        "recognized_references": [
+          "evidence.earnings",
+          "evidence.market",
+          "evidence.news.items[0]"
+        ],
+        "unknown_references": [],
+        "issues": [],
+        "passed": true,
+        "scope": "Minimum citation presence and reference validity only."
+      },
+      "matches_cited_evidence_compiler": true,
+      "passed": true,
+      "scope": "Three named percentage metrics, valid supplied references and exact schema-bound report wording; not general financial truth or model acceptance."
+    },
+    {
+      "calculations": [
+        {
+          "metric": "revenue_growth",
+          "expected_percent": "20.0",
+          "displayed_percent": [
+            "20"
+          ],
+          "passed": true
+        },
+        {
+          "metric": "operating_margin",
+          "expected_percent": "10.0",
+          "displayed_percent": [
+            "10"
+          ],
+          "passed": true
+        },
+        {
+          "metric": "closing_price_change",
+          "expected_percent": "10.0",
+          "displayed_percent": [
+            "10"
+          ],
+          "passed": true
+        }
+      ],
+      "citation_check": {
+        "recognized_references": [
+          "evidence.earnings",
+          "evidence.market",
+          "evidence.news.items[0]"
+        ],
+        "unknown_references": [],
+        "issues": [],
+        "passed": true,
+        "scope": "Minimum citation presence and reference validity only."
+      },
+      "matches_cited_evidence_compiler": true,
+      "passed": true,
+      "scope": "Three named percentage metrics, valid supplied references and exact schema-bound report wording; not general financial truth or model acceptance."
+    }
+  ],
+  "same_input_before": {
+    "calculations": [
+      {
+        "metric": "revenue_growth",
+        "expected_percent": "20.0",
+        "displayed_percent": [
+          "-20"
+        ],
+        "passed": false
+      },
+      {
+        "metric": "operating_margin",
+        "expected_percent": "10.0",
+        "displayed_percent": [
+          "-20"
+        ],
+        "passed": false
+      },
+      {
+        "metric": "closing_price_change",
+        "expected_percent": "10.0",
+        "displayed_percent": [
+          "4"
+        ],
+        "passed": false
+      }
+    ],
+    "citation_check": {
+      "recognized_references": [],
+      "unknown_references": [],
+      "issues": [
+        "No valid supplied citation was found. Cite the supplied source URLs or evidence paths alongside the factual claims."
+      ],
+      "passed": false,
+      "scope": "Minimum citation presence and reference validity only."
+    },
+    "matches_cited_evidence_compiler": false,
+    "passed": false,
+    "scope": "Three named percentage metrics, valid supplied references and exact schema-bound report wording; not general financial truth or model acceptance."
+  },
+  "same_input_after": {
+    "calculations": [
+      {
+        "metric": "revenue_growth",
+        "expected_percent": "20.0",
+        "displayed_percent": [
+          "20"
+        ],
+        "passed": true
+      },
+      {
+        "metric": "operating_margin",
+        "expected_percent": "10.0",
+        "displayed_percent": [
+          "10"
+        ],
+        "passed": true
+      },
+      {
+        "metric": "closing_price_change",
+        "expected_percent": "10.0",
+        "displayed_percent": [
+          "10"
+        ],
+        "passed": true
+      }
+    ],
+    "citation_check": {
+      "recognized_references": [
+        "evidence.earnings",
+        "evidence.market",
+        "evidence.news.items[0]"
+      ],
+      "unknown_references": [],
+      "issues": [],
+      "passed": true,
+      "scope": "Minimum citation presence and reference validity only."
+    },
+    "matches_cited_evidence_compiler": true,
+    "passed": true,
+    "scope": "Three named percentage metrics, valid supplied references and exact schema-bound report wording; not general financial truth or model acceptance."
+  },
+  "unchanged_model_acceptance": [
+    false,
+    false
+  ],
+  "model_acceptance_note": "The model acceptance flags and scores remain unchanged. Evidence verification is a separate, explicitly scoped measurement.",
+  "verifier_sha256": "27cd44201f72f79fc6f3a6fae77137694e65d3b8692de6c6498f3e467bd3b4ac"
+}

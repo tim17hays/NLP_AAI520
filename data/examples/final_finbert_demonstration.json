@@ -1,0 +1,87 @@
+{
+  "execution_mode": "fresh_local_finbert",
+  "input_mode": "frozen fictional classroom news, duplicated to test preprocessing",
+  "model": "ProsusAI/finbert",
+  "model_snapshot": "4556d13015211d73dccd3fdd39d39232506f3e43",
+  "torch": "2.6.0",
+  "transformers": "4.51.3",
+  "finished_at": "2026-10-19T23:42:06.142201+00:00",
+  "raw_news": [
+    {
+      "title": "Fictional DEMO reports supplier delays",
+      "summary": "Supplier delays could increase near-term costs. The impact is not quantified. No stock-price target is supplied.",
+      "publisher": "Fictional classroom source",
+      "link": "https://example.com/fictional-demo/news",
+      "published_at": "2026-09-25T00:00:00+00:00"
+    },
+    {
+      "title": "Fictional DEMO reports supplier delays",
+      "summary": "Supplier delays could increase near-term costs. The impact is not quantified. No stock-price target is supplied.",
+      "publisher": "Fictional classroom source",
+      "link": "https://example.com/fictional-demo/news",
+      "published_at": "2026-09-25T00:00:00+00:00"
+    }
+  ],
+  "result": {
+    "ticker": "DEMO",
+    "workflow": [
+      "ingest",
+      "preprocess",
+      "classify_finbert",
+      "extract",
+      "summarize"
+    ],
+    "items": [
+      {
+        "ticker": "DEMO",
+        "title": "Fictional DEMO reports supplier delays",
+        "summary": "Supplier delays could increase near-term costs. The impact is not quantified. No stock-price target is supplied.",
+        "publisher": "Fictional classroom source",
+        "url": "https://example.com/fictional-demo/news",
+        "published_at": "2026-09-25T00:00:00+00:00",
+        "sentiment": "negative",
+        "sentiment_score": 0.8012,
+        "extracted_facts": [
+          "Fictional DEMO reports supplier delays."
+        ],
+        "source": {
+          "name": "Fictional classroom source",
+          "url": "https://example.com/fictional-demo/news",
+          "accessed_at": "2026-10-19T23:42:06.141616+00:00"
+        }
+      }
+    ],
+    "summary": "Processed 1 source-attributed news items (1 negative). Representative headlines: Fictional DEMO reports supplier delays.",
+    "errors": [],
+    "trace": {
+      "ingest": {
+        "input_count": 2
+      },
+      "preprocess": {
+        "retained_count": 1,
+        "records": [
+          {
+            "text": "Fictional DEMO reports supplier delays. Supplier delays could increase near-term costs. The impact is not quantified. No stock-price target is supplied.",
+            "url": "https://example.com/fictional-demo/news"
+          }
+        ]
+      },
+      "classify_finbert": [
+        {
+          "url": "https://example.com/fictional-demo/news",
+          "label": "negative",
+          "score": 0.8012
+        }
+      ],
+      "extract": [
+        {
+          "url": "https://example.com/fictional-demo/news",
+          "facts": [
+            "Fictional DEMO reports supplier delays."
+          ]
+        }
+      ],
+      "summarize": "Processed 1 source-attributed news items (1 negative). Representative headlines: Fictional DEMO reports supplier delays."
+    }
+  }
+}

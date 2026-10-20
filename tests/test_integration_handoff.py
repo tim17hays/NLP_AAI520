@@ -64,6 +64,8 @@ def test_prompt_retains_late_source_errors_and_lessons(monkeypatch):
         def decode(self, *args, **kwargs):
             return "Draft with sources"
     class Model:
+        device = "cuda"
+
         def generate(self, **kwargs):
             return Tensor()
     monkeypatch.setattr("src.llm._load_model", lambda: (Tokenizer(), Model()))

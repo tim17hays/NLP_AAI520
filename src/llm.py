@@ -1,35 +1,46 @@
-
 """Qwen-based draft generation for financial research."""
 
 import json
+import os
 
 
-MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
+MODEL_NAME = os.getenv("AAI520_MODEL_NAME", "Qwen/Qwen2.5-1.5B-Instruct")
 
 _tokenizer = None
 _model = None
 
 
 def _load_model():
-    """Load Qwen once, using the Colab GPU."""
+    """Load Qwen once on CUDA, Apple MPS, or explicitly supported CPU."""
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     global _tokenizer, _model
 
-    if not torch.cuda.is_available():
-        raise RuntimeError(
-            "A CUDA GPU is required for Qwen inference. "
-            "Run this project in Google Colab with a GPU runtime."
-        )
+    requested = os.getenv("AAI520_DEVICE")
+    if requested not in (None, "cuda", "mps", "cpu"):
+        raise ValueError("AAI520_DEVICE must be cuda, mps or cpu.")
+    device = requested or (
+        "cuda"
+        if torch.cuda.is_available()
+        else "mps"
+        if torch.backends.mps.is_available()
+        else "cpu"
+    )
+    model_source = os.getenv("AAI520_MODEL_PATH", MODEL_NAME)
 
     if _model is None:
-        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+        _tokenizer = AutoTokenizer.from_pretrained(model_source)
         _model = AutoModelForCausalLM.from_pretrained(
-            MODEL_NAME,
-            torch_dtype=torch.float16,
-        ).to("cuda")
+            model_source,
+            torch_dtype=torch.float32 if device == "cpu" else torch.float16,
+            attn_implementation="eager",
+        ).to(device)
         _model.eval()
+        # Greedy decoding does not use the checkpoint's sampling defaults.
+        _model.generation_config.temperature = None
+        _model.generation_config.top_p = None
+        _model.generation_config.top_k = None
 
     return _tokenizer, _model
 
@@ -85,11 +96,15 @@ def generate_draft(
         truncation=False,
     )
     config = getattr(model, "config", None)
-    context_limit = min(getattr(config, "max_position_embeddings", 32768), 32768)
+    context_limit = min(
+        getattr(config, "max_position_embeddings", 32768), 32768
+    )
     if inputs["input_ids"].shape[-1] + 512 > context_limit:
-        raise ValueError("Evidence exceeds model context; reduce retrieved items explicitly before drafting.")
+        raise ValueError(
+            "Evidence exceeds model context; reduce retrieved items explicitly before drafting."
+        )
 
-    inputs = {key: value.to("cuda") for key, value in inputs.items()}
+    inputs = {key: value.to(model.device) for key, value in inputs.items()}
 
     with torch.no_grad():
         output = model.generate(
@@ -106,6 +121,11 @@ def generate_draft(
     text = tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
     if not text:
         raise RuntimeError("Qwen returned an empty draft.")
-    if new_tokens.shape[-1] >= 512 and int(new_tokens[-1]) != tokenizer.eos_token_id:
-        raise RuntimeError("Qwen reached the output limit; draft may be incomplete.")
+    if (
+        new_tokens.shape[-1] >= 512
+        and int(new_tokens[-1]) != tokenizer.eos_token_id
+    ):
+        raise RuntimeError(
+            "Qwen reached the output limit; draft may be incomplete."
+        )
     return text

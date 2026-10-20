@@ -38,6 +38,8 @@ def test_generate_draft_returns_text(monkeypatch):
             return "- Market evidence summary."
 
     class FakeModel:
+        device = "cuda"
+
         def generate(self, **kwargs):
             return FakeTensor()
 

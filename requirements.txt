@@ -4,5 +4,8 @@ yfinance>=0.2
 python-dotenv>=1.0
 jupyter>=1.1
 pytest>=8.0
-transformers>=4.45
-torch>=2.4
+transformers>=4.51
+torch>=2.6
+
+# Final report comparison figure
+matplotlib>=3.10
